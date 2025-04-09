@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation de Mathématiques - 3ème Prépa Métier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+        }
+        .student-info {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        .student-info input {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 200px;
+        }
+        .exercise {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .exercise h3 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .timer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .formula {
+            font-style: italic;
+            background-color: #f9f9f9;
+            padding: 8px;
+            border-left: 3px solid #4CAF50;
+            margin: 10px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100px;
+        }
+        .graph-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .graph-option {
+            margin: 10px;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+        .matching-exercise {
+            display: flex;
+            flex-direction: column;
+        }
+        .matching-row {
+            display: flex;
+            margin: 5px 0;
+        }
+        .matching-item {
+            padding: 8px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            min-width: 100px;
+            text-align: center;
+        }
+        select {
+            padding: 5px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer" id="timer">01:00</div>
+
+    <div class="header">
+        <h1>Évaluation de Mathématiques</h1>
+        <h2>Niveau 3ème Prépa Métier</h2>
+    </div>
+
+    <div class="student-info">
+        <h3>Informations de l'élève</h3>
+        <div>
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" required>
+        </div>
+        <div>
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" required>
+        </div>
+        <div>
+            <label for="classe">Classe :</label>
+            <input type="text" id="classe" required>
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h3>Exercice 1 : Calcul de volume d'un cylindre</h3>
+        <p>Calcule le volume d'un cylindre de rayon 5 cm et de hauteur 12 cm.</p>
+        <div class="formula">Formule : V = π × r² × h (π ≈ 3.14)</div>
+        <p>Réponse : <input type="number" id="ex1-answer" step="0.01"> cm³</p>
+    </div>
+
+    <div class="exercise">
+        <h3>Exercice 2 : Calcul de masse à partir d'un volume</h3>
+        <p>Un objet en aluminium a un volume de 150 cm³. La masse volumique de l'aluminium est de 2,7 g/cm³. Quelle est la masse de cet objet?</p>
+        <div class="formula">Relation : Masse = Masse volumique × Volume</div>
+        <p>Réponse : <input type="number" id="ex2-answer" step="0.01"> g</p>
+    </div>
+
+    <div class="exercise">
+        <h3>Exercice 3 : Calcul de masse volumique</h3>
+        <p>Un échantillon de bois a une masse de 450 g et occupe un volume de 900 cm³. Calcule sa masse volumique.</p>
+        <div class="formula">Relation : Masse volumique = Masse / Volume</div>
+        <p>Réponse : <input type="number" id="ex3-answer" step="0.01"> g/cm³</p>
+    </div>
+
+    <div class="exercise">
+        <h3>Exercice 4 : Problème de cyclisme</h3>
+        <p>Un cycliste parcourt 45 km en 1 heure et 30 minutes.</p>
+        <ol>
+            <li>
+                <p>Calcule sa vitesse moyenne en km/h.</p>
+                <p>Réponse : <input type="number" id="ex4-1-answer" step="0.01"> km/h</p>
+            </li>
+            <li>
+                <p>Si le cycliste maintient cette vitesse, combien de temps mettra-t-il pour parcourir 72 km? (en heures et minutes)</p>
+                <p>Réponse : <input type="number" id="ex4-2-hours" min="0" max="24"> heures <input type="number" id="ex4-2-minutes" min="0" max="59"> minutes</p>
+            </li>
+            <li>
+                <p>Convertis la vitesse moyenne du cycliste en m/s.</p>
+                <div class="formula">Rappel : 1 km/h = 1000 m / 3600 s ≈ 0,278 m/s</div>
+                <p>Réponse : <input type="number" id="ex4-3-answer" step="0.01"> m/s</p>
+            </li>
+            <li>
+                <p>Le cycliste veut parcourir 14,5 km en 40 minutes. À quelle vitesse moyenne doit-il rouler? (en km/h)</p>
+                <p>Réponse : <input type="number" id="ex4-4-answer" step="0.01"> km/h</p>
+            </li>
+        </ol>
+    </div>
+
+    <div class="exercise">
+        <h3>Exercice 5 : Conversion de durées</h3>
+        <p>Convertis 15000 secondes en heures, minutes et secondes.</p>
+        <div class="formula">
+            Rappel :<br>
+            1 minute = 60 secondes<br>
+            1 heure = 60 minutes = 3600 secondes
+        </div>
+        <p>Réponse : 
+            <input type="number" id="ex5-hours" min="0" max="24"> heures 
+            <input type="number" id="ex5-minutes" min="0" max="59"> minutes 
+            <input type="number" id="ex5-seconds" min="0" max="59"> secondes
+        </p>
+    </div>
+
+    <div class="exercise">
+        <h3>Exercice 6 : Fonction affine</h3>
+        <p>On considère la fonction f(x) = 2x - 0,5.</p>
+        <p>Complète le tableau de valeurs suivant :</p>
+        <table>
+            <tr>
+                <th>x</th>
+                <th>-10</th>
+                <th>-5</th>
+                <th>-1</th>
+                <th>0</th>
+                <th>2</th>
+                <th>4</th>
+                <th>8</th>
+            </tr>
+            <tr>
+                <td>f(x)</td>
+                <td><input type="number" id="ex6--10" step="0.1"></td>
+                <td><input type="number" id="ex6--5" step="0.1"></td>
+                <td><input type="number" id="ex6--1" step="0.1"></td>
+                <td><input type="number" id="ex6-0" step="0.1"></td>
+                <td><input type="number" id="ex6-2" step="0.1"></td>
+                <td><input type="number" id="ex6-4" step="0.1"></td>
+                <td><input type="number" id="ex6-8" step="0.1"></td>
+            </tr>
+        </table>
+        <p>Parmi les graphiques suivants, sélectionne celui qui correspond à cette fonction :</p>
+        <div class="graph-container">
+            <div class="graph-option">
+                <canvas id="graph1" width="150" height="150"></canvas>
+                <br>
+                <input type="radio" name="graph" value="1"> 1. Fonction affine croissante
+            </div>
+            <div class="graph-option">
+                <canvas id="graph2" width="150" height="150"></canvas>
+                <br>
+                <input type="radio" name="graph" value="2"> 2. Fonction affine décroissante
+            </div>
+            <div class="graph-option">
+                <canvas id="graph3" width="150" height="150"></canvas>
+                <br>
+                <input type="radio" name="graph" value="3"> 3. Fonction quadratique
+            </div>
+            <div class="graph-option">
+                <canvas id="graph4" width="150" height="150"></canvas>
+                <br>
+                <input type="radio" name="graph" value="4"> 4. Fonction inverse
+            </div>
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h3>Exercice 7 : Relier les notions</h3>
+        <p>Relie chaque notion à sa définition :</p>
+        <div class="matching-exercise">
+            <div class="matching-row">
+                <div class="matching-item">Masse volumique</div>
+                <select id="match1">
+                    <option value="">-- Choisir --</option>
+                    <option value="1">Masse par unité de volume</option>
+                    <option value="2">Mouvement rectiligne uniforme</option>
+                    <option value="3">Distance parcourue par unité de temps</option>
+                    <option value="4">Volume = π × r² × h</option>
+                </select>
+            </div>
+            <div class="matching-row">
+                <div class="matching-item">Vitesse moyenne</div>
+                <select id="match2">
+                    <option value="">-- Choisir --</option>
+                    <option value="1">Masse par unité de volume</option>
+                    <option value="2">Mouvement rectiligne uniforme</option>
+                    <option value="3">Distance parcourue par unité de tiempo</option>
+                    <option value="4">Volume = π × r² × h</option>
+                </select>
+            </div>
+            <div class="matching-row">
+                <div class="matching-item">Volume d'un cylindre</div>
+                <select id="match3">
+                    <option value="">-- Choisir --</option>
+                    <option value="1">Masse par unité de volume</option>
+                    <option value="2">Mouvement rectiligne uniforme</option>
+                    <option value="3">Distance parcourue par unité de tiempo</option>
+                    <option value="4">Volume = π × r² × h</option>
+                </select>
+            </div>
+            <div class="matching-row">
+                <div class="matching-item">Fonction affine</div>
+                <select id="match4">
+                    <option value="">-- Choisir --</option>
+                    <option value="1">Masse par unité de volume</option>
+                    <option value="2">Mouvement rectiligne uniforme</option>
+                    <option value="3">Distance parcourue par unité de tiempo</option>
+                    <option value="4">Volume = π × r² × h</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <button id="submit-btn" onclick="submitEvaluation()">Envoyer l'évaluation</button>
+
+    <script>
+        // Timer
+        let timeLeft = 60; // 1 minute en secondes
+        const timerElement = document.getElementById('timer');
+        
+        const timer = setInterval(function() {
+            const minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            
+            // Ajoute un zéro devant les secondes si nécessaire
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            
+            timerElement.textContent = minutes + ':' + seconds;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                timerElement.textContent = "Temps écoulé!";
+                submitEvaluation();
+            } else {
+                timeLeft--;
+            }
+        }, 1000);
+
+        // Dessiner les graphiques avec Canvas
+        function drawGraph(canvasId, type) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            // Effacer le canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Axes
+            ctx.beginPath();
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 1;
+            
+            // Axe X
+            ctx.moveTo(10, height/2);
+            ctx.lineTo(width-10, height/2);
+            
+            // Axe Y
+            ctx.moveTo(width/2, 10);
+            ctx.lineTo(width/2, height-10);
+            
+            // Flèches
+            ctx.moveTo(width-10, height/2);
+            ctx.lineTo(width-20, height/2-5);
+            ctx.lineTo(width-20, height/2+5);
+            ctx.lineTo(width-10, height/2);
+            
+            ctx.moveTo(width/2, 10);
+            ctx.lineTo(width/2-5, 20);
+            ctx.lineTo(width/2+5, 20);
+            ctx.lineTo(width/2, 10);
+            
+            ctx.stroke();
+            
+            // Étiquettes
+            ctx.font = '10px Arial';
+            ctx.fillStyle = '#000';
+            ctx.fillText('x', width-15, height/2-5);
+            ctx.fillText('y', width/2+5, 15);
+            
+            // Dessiner la fonction selon le type
+            ctx.beginPath();
+            ctx.strokeStyle = '#FF0000';
+            ctx.lineWidth = 2;
+            
+            switch(type) {
+                case 'affine-croissante':
+                    // f(x) = 2x - 0.5 (la vraie fonction de l'exercice)
+                    for (let x = -width/2; x < width/2; x += 0.5) {
+                        const px = x + width/2;
+                        const py = height/2 - (2*(x/10) - 0.5)*10;
+                        
+                        if (x === -width/2) {
+                            ctx.moveTo(px, py);
+                        } else {
+                            ctx.lineTo(px, py);
+                        }
+                    }
+                    break;
+                    
+                case 'affine-dec':
+                    // f(x) = -x + 3
+                    for (let x = -width/2; x < width/2; x += 0.5) {
+                        const px = x + width/2;
+                        const py = height/2 - (-(x/10) + 3)*10;
+                        
+                        if (x === -width/2) {
+                            ctx.moveTo(px, py);
+                        } else {
+                            ctx.lineTo(px, py);
+                        }
+                    }
+                    break;
+                    
+                case 'quadratique':
+                    // f(x) = 0.05x² - 3
+                    for (let x = -width/2; x < width/2; x += 0.5) {
+                        const px = x + width/2;
+                        const py = height/2 - (0.05*Math.pow(x/10, 2) - 3)*10;
+                        
+                        if (x === -width/2) {
+                            ctx.moveTo(px, py);
+                        } else {
+                            ctx.lineTo(px, py);
+                        }
+                    }
+                    break;
+                    
+                case 'inverse':
+                    // f(x) = 20/x + 5 (pour x ≠ 0)
+                    for (let x = -width/2; x < width/2; x += 0.5) {
+                        if (Math.abs(x) < 5) continue; // Éviter la division par zéro
+                        
+                        const px = x + width/2;
+                        const py = height/2 - (20/(x/10) + 5)*10;
+                        
+                        if (x === -width/2) {
+                            ctx.moveTo(px, py);
+                        } else if (x > -5 && x < 5) {
+                            // Interrompre la ligne autour de x=0
+                            ctx.moveTo(px, py);
+                        } else {
+                            ctx.lineTo(px, py);
+                        }
+                    }
+                    break;
+            }
+            
+            ctx.stroke();
+        }
+
+        // Dessiner les 4 graphiques quand la page est chargée
+        window.onload = function() {
+            drawGraph('graph1', 'affine-croissante'); // La bonne réponse
+            drawGraph('graph2', 'affine-dec');
+            drawGraph('graph3', 'quadratique');
+            drawGraph('graph4', 'inverse');
+        };
+
+        // Fonction pour soumettre l'évaluation
+        function submitEvaluation() {
+            clearInterval(timer); // Arrête le timer
+            
+            // Récupère les informations de l'élève
+            const nom = document.getElementById('nom').value;
+            const prenom = document.getElementById('prenom').value;
+            const classe = document.getElementById('classe').value;
+            
+            // Validation des champs obligatoires
+            if (!nom || !prenom || !classe) {
+                alert('Veuillez remplir tous les champs (nom, prénom, classe)');
+                return;
+            }
+            
+            // Récupère les réponses
+            const answers = {
+                exercice1: document.getElementById('ex1-answer').value,
+                exercice2: document.getElementById('ex2-answer').value,
+                exercice3: document.getElementById('ex3-answer').value,
+                exercice4: {
+                    vitesseMoyenne: document.getElementById('ex4-1-answer').value,
+                    tempsParcours: {
+                        heures: document.getElementById('ex4-2-hours').value,
+                        minutes: document.getElementById('ex4-2-minutes').value
+                    },
+                    vitesseMS: document.getElementById('ex4-3-answer').value,
+                    vitesse14km: document.getElementById('ex4-4-answer').value
+                },
+                exercice5: {
+                    heures: document.getElementById('ex5-hours').value,
+                    minutes: document.getElementById('ex5-minutes').value,
+                    secondes: document.getElementById('ex5-seconds').value
+                },
+                exercice6: {
+                    "-10": document.getElementById('ex6--10').value,
+                    "-5": document.getElementById('ex6--5').value,
+                    "-1": document.getElementById('ex6--1').value,
+                    "0": document.getElementById('ex6-0').value,
+                    "2": document.getElementById('ex6-2').value,
+                    "4": document.getElementById('ex6-4').value,
+                    "8": document.getElementById('ex6-8').value,
+                    graphique: document.querySelector('input[name="graph"]:checked')?.value
+                },
+                exercice7: {
+                    masseVolumique: document.getElementById('match1').value,
+                    vitesseMoyenne: document.getElementById('match2').value,
+                    volumeCylindre: document.getElementById('match3').value,
+                    fonctionAffine: document.getElementById('match4').value
+                }
+            };
+            
+            // Crée une capture de la page (simplifiée)
+            const htmlContent = document.documentElement.outerHTML;
+            
+            // Capturer les canvas en tant qu'images
+            const canvasContents = {};
+            document.querySelectorAll('canvas').forEach((canvas, index) => {
+                canvasContents[`graph${index+1}`] = canvas.toDataURL('image/png');
+            });
+            
+            // Envoi des résultats (simulation)
+            const results = {
+                nom,
+                prenom,
+                classe,
+                answers,
+                timeLeft: timeLeft,
+                pageContent: htmlContent,
+                graphs: canvasContents
+            };
+            
+            console.log('Résultats à envoyer:', results);
+            
+            // Simuler l'envoi par email
+            let emailBody = `Nom: ${nom}%0APrénom: ${prenom}%0AClasse: ${classe}%0ATemps restant: ${timeLeft} secondes%0A%0ARéponses:%0A`;
+            
+            // Ajouter les réponses textuelles
+            for (const [ex, answers] of Object.entries(results.answers)) {
+                emailBody += `%0A${ex}: ${JSON.stringify(answers)}`;
+            }
+            
+            const mailtoLink = `mailto:contact@nicolasboyer.fr?subject=Évaluation Mathématiques - ${prenom} ${nom}&body=${emailBody}`;
+            window.open(mailtoLink);
+            
+            alert('Vos réponses ont été envoyées à votre professeur. Merci!');
+        }
+    </script>
+</body>
+</html>
