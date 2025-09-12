@@ -1,9 +1,532 @@
-<html>
-<head>
-    <title>Updated Page</title>
+<!DOCTYPE html>
+<!-- saved from url=(0101)https://page.gensparksite.com/jupyter/tooluse_rvUYvxzZQNKbw8wU5dGtnw/output/calcul_mental_facile.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul Mental Facile - 3ème Prépa-Métiers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .instructions {
+            background: #e8f5e8;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+        }
+
+        .instructions h2 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        .instructions ul {
+            list-style: none;
+            color: #2e7d32;
+        }
+
+        .instructions li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .instructions li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .question-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .progress {
+            background: #f0f0f0;
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(45deg, #4CAF50, #81C784);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .question-number {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 3em;
+            color: #333;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 3px solid #e3f2fd;
+        }
+
+        .input-group {
+            margin: 30px 0;
+        }
+
+        .answer-input {
+            font-size: 2em;
+            padding: 15px 25px;
+            border: 3px solid #ddd;
+            border-radius: 15px;
+            text-align: center;
+            width: 200px;
+            margin: 0 10px;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .buttons {
+            margin: 30px 0;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+        }
+
+        .btn-help {
+            background: #FF9800;
+            color: white;
+        }
+
+        .btn-help:hover {
+            background: #F57C00;
+            transform: translateY(-2px);
+        }
+
+        .message {
+            font-size: 1.3em;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .message.info {
+            background: #cce7ff;
+            color: #004085;
+            border: 2px solid #b3d7ff;
+        }
+
+        .final-score {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #e8f5e8, #f3e5f5);
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .final-score h2 {
+            color: #2e7d32;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .score-display {
+            font-size: 3em;
+            color: #4CAF50;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .emoji {
+            font-size: 2em;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .question {
+                font-size: 2em;
+            }
+
+            .answer-input {
+                font-size: 1.5em;
+                width: 150px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the updated index.html!</h1>
-    <p>This content is from the latest commit.</p>
-</body>
-</html>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Calcul Mental Facile</h1>
+            <p>3ème Prépa-Métiers - Entraînement Progressif</p>
+        </div>
+
+        <div class="instructions">
+            <h2>📝 Instructions Bienveillantes</h2>
+            <ul>
+                <li>Prends ton temps, il n'y a pas de chronomètre stressant</li>
+                <li>Si tu es bloqué, utilise le bouton "Voir la réponse"</li>
+                <li>Chaque bonne réponse compte, même si tu as eu de l'aide</li>
+                <li>L'important c'est de progresser à ton rythme</li>
+                <li>40 questions avec une difficulté qui augmente doucement</li>
+            </ul>
+            <button class="btn btn-primary" onclick="startExercise()">🚀 Commencer l'exercice</button>
+        </div>
+
+        <div id="exercise-content" class="main-content hidden">
+            <div class="progress">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number" id="question-number">Question 1 sur 40</div>
+                <div class="question" id="question-display">3 + 4 = ?</div>
+
+                <div class="input-group">
+                    <input type="number" class="answer-input" id="user-answer" placeholder="?">
+                </div>
+
+                <div class="buttons">
+                    <button class="btn btn-primary" onclick="checkAnswer()">✅ Vérifier</button>
+                    <button class="btn btn-help" onclick="showAnswer()">👁️ Voir la réponse</button>
+                    <button class="btn btn-secondary hidden" id="next-btn" onclick="nextQuestion()">➡️ Question suivante</button>
+                </div>
+
+                <div id="message-display"></div>
+            </div>
+        </div>
+
+        <div id="final-screen" class="main-content hidden">
+            <div class="final-score">
+                <h2>🎉 Félicitations !</h2>
+                <div class="score-display" id="final-score-display">0/40</div>
+                <div id="encouragement-message"></div>
+                <button class="btn btn-primary" onclick="restartExercise()">🔄 Recommencer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Données des questions
+        const questions = [
+            // Additions (1-10)
+            {type: "addition", a: 3, b: 4, answer: 7, symbol: "+"},
+            {type: "addition", a: 5, b: 3, answer: 8, symbol: "+"},
+            {type: "addition", a: 6, b: 2, answer: 8, symbol: "+"},
+            {type: "addition", a: 4, b: 5, answer: 9, symbol: "+"},
+            {type: "addition", a: 7, b: 2, answer: 9, symbol: "+"},
+            {type: "addition", a: 8, b: 1, answer: 9, symbol: "+"},
+            {type: "addition", a: 5, b: 4, answer: 9, symbol: "+"},
+            {type: "addition", a: 6, b: 3, answer: 9, symbol: "+"},
+            {type: "addition", a: 3, b: 6, answer: 9, symbol: "+"},
+            {type: "addition", a: 4, b: 4, answer: 8, symbol: "+"},
+
+            // Soustractions (11-20)
+            {type: "soustraction", a: 15, b: 3, answer: 12, symbol: "-"},
+            {type: "soustraction", a: 18, b: 6, answer: 12, symbol: "-"},
+            {type: "soustraction", a: 20, b: 5, answer: 15, symbol: "-"},
+            {type: "soustraction", a: 16, b: 4, answer: 12, symbol: "-"},
+            {type: "soustraction", a: 19, b: 7, answer: 12, symbol: "-"},
+            {type: "soustraction", a: 17, b: 5, answer: 12, symbol: "-"},
+            {type: "soustraction", a: 14, b: 2, answer: 12, symbol: "-"},
+            {type: "soustraction", a: 13, b: 1, answer: 12, symbol: "-"},
+            {type: "soustraction", a: 18, b: 8, answer: 10, symbol: "-"},
+            {type: "soustraction", a: 16, b: 6, answer: 10, symbol: "-"},
+
+            // Multiplications (21-30)
+            {type: "multiplication", a: 4, b: 2, answer: 8, symbol: "×"},
+            {type: "multiplication", a: 3, b: 2, answer: 6, symbol: "×"},
+            {type: "multiplication", a: 5, b: 2, answer: 10, symbol: "×"},
+            {type: "multiplication", a: 6, b: 2, answer: 12, symbol: "×"},
+            {type: "multiplication", a: 7, b: 2, answer: 14, symbol: "×"},
+            {type: "multiplication", a: 3, b: 5, answer: 15, symbol: "×"},
+            {type: "multiplication", a: 4, b: 5, answer: 20, symbol: "×"},
+            {type: "multiplication", a: 6, b: 5, answer: 30, symbol: "×"},
+            {type: "multiplication", a: 8, b: 5, answer: 40, symbol: "×"},
+            {type: "multiplication", a: 7, b: 10, answer: 70, symbol: "×"},
+
+            // Divisions (31-40)
+            {type: "division", a: 10, b: 2, answer: 5, symbol: "÷"},
+            {type: "division", a: 12, b: 2, answer: 6, symbol: "÷"},
+            {type: "division", a: 16, b: 2, answer: 8, symbol: "÷"},
+            {type: "division", a: 18, b: 2, answer: 9, symbol: "÷"},
+            {type: "division", a: 20, b: 2, answer: 10, symbol: "÷"},
+            {type: "division", a: 15, b: 5, answer: 3, symbol: "÷"},
+            {type: "division", a: 25, b: 5, answer: 5, symbol: "÷"},
+            {type: "division", a: 35, b: 5, answer: 7, symbol: "÷"},
+            {type: "division", a: 50, b: 10, answer: 5, symbol: "÷"},
+            {type: "division", a: 80, b: 10, answer: 8, symbol: "÷"}
+        ];
+        // Variables globales
+        let currentQuestion = 0;
+        let score = 0;
+        let totalQuestions = 40;
+        let hasSeenAnswer = false;
+
+        // Messages encourageants
+        const encouragements = [
+            "Excellent ! 🌟", "Très bien ! 👏", "Parfait ! 🎯", "Super ! 🚀",
+            "Bravo ! 🎉", "Magnifique ! ✨", "Fantastique ! 🌈", "Génial ! 💫"
+        ];
+
+        const helpMessages = [
+            "Pas de souci ! Tu as vu la réponse, maintenant tu la retiens ! 😊",
+            "C'est comme ça qu'on apprend ! Continue ! 💪",
+            "Tu progresses à ton rythme, c'est parfait ! 🌱",
+            "Chaque question t'aide à t'améliorer ! 📈"
+        ];
+
+        // Fonction pour démarrer l'exercice
+        function startExercise() {
+            document.querySelector('.instructions').classList.add('hidden');
+            document.getElementById('exercise-content').classList.remove('hidden');
+            displayQuestion();
+        }
+
+        // Fonction pour afficher une question
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            const questionDisplay = document.getElementById('question-display');
+            const questionNumber = document.getElementById('question-number');
+            const userAnswer = document.getElementById('user-answer');
+            const messageDisplay = document.getElementById('message-display');
+            const nextBtn = document.getElementById('next-btn');
+
+            // Mise à jour de l'affichage
+            questionNumber.textContent = `Question ${currentQuestion + 1} sur ${totalQuestions}`;
+            questionDisplay.textContent = `${question.a} ${question.symbol} ${question.b} = ?`;
+            userAnswer.value = '';
+            userAnswer.focus();
+            messageDisplay.innerHTML = '';
+            nextBtn.classList.add('hidden');
+            hasSeenAnswer = false;
+
+            // Mise à jour de la barre de progression
+            const progress = ((currentQuestion) / totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+
+            // Affichage du type d'opération
+            let operationType = '';
+            switch(question.type) {
+                case 'addition': operationType = '➕ Addition'; break;
+                case 'soustraction': operationType = '➖ Soustraction'; break;
+                case 'multiplication': operationType = '✖️ Multiplication'; break;
+                case 'division': operationType = '➗ Division'; break;
+            }
+
+            // Ajouter le type d'opération si c'est une nouvelle catégorie
+            if (currentQuestion === 0 || currentQuestion === 10 || currentQuestion === 20 || currentQuestion === 30) {
+                messageDisplay.innerHTML = `<div class="message info">📚 Nouvelle section: ${operationType}</div>`;
+            }
+        }
+
+        // Fonction pour vérifier la réponse
+        function checkAnswer() {
+            const userAnswer = document.getElementById('user-answer');
+            const messageDisplay = document.getElementById('message-display');
+            const nextBtn = document.getElementById('next-btn');
+
+            const userValue = parseInt(userAnswer.value);
+            const correctAnswer = questions[currentQuestion].answer;
+
+            if (isNaN(userValue)) {
+                messageDisplay.innerHTML = '<div class="message info">🤔 Entre un nombre dans la case !</div>';
+                return;
+            }
+
+            if (userValue === correctAnswer) {
+                const encouragement = encouragements[Math.floor(Math.random() * encouragements.length)];
+                messageDisplay.innerHTML = `<div class="message success">${encouragement}<br>La réponse ${correctAnswer} est correcte !</div>`;
+
+                if (!hasSeenAnswer) {
+                    score++;
+                }
+
+                nextBtn.classList.remove('hidden');
+            } else {
+                messageDisplay.innerHTML = `<div class="message error">🤷‍♀️ Pas tout à fait !<br>Tu as mis ${userValue}, mais la bonne réponse est ${correctAnswer}.<br>Retiens-la pour la prochaine fois ! 😊</div>`;
+                nextBtn.classList.remove('hidden');
+            }
+        }
+
+        // Fonction pour montrer la réponse
+        function showAnswer() {
+            const messageDisplay = document.getElementById('message-display');
+            const userAnswer = document.getElementById('user-answer');
+            const nextBtn = document.getElementById('next-btn');
+
+            const correctAnswer = questions[currentQuestion].answer;
+            const helpMessage = helpMessages[Math.floor(Math.random() * helpMessages.length)];
+
+            userAnswer.value = correctAnswer;
+            messageDisplay.innerHTML = `<div class="message info">💡 La réponse est ${correctAnswer}<br>${helpMessage}</div>`;
+            nextBtn.classList.remove('hidden');
+            hasSeenAnswer = true;
+        }
+
+        // Fonction pour passer à la question suivante
+        function nextQuestion() {
+            currentQuestion++;
+
+            if (currentQuestion >= totalQuestions) {
+                showFinalScore();
+            } else {
+                displayQuestion();
+            }
+        }
+
+        // Fonction pour afficher le score final
+        function showFinalScore() {
+            document.getElementById('exercise-content').classList.add('hidden');
+            document.getElementById('final-screen').classList.remove('hidden');
+
+            const finalScoreDisplay = document.getElementById('final-score-display');
+            const encouragementMessage = document.getElementById('encouragement-message');
+
+            finalScoreDisplay.textContent = `${score}/${totalQuestions}`;
+
+            // Messages personnalisés selon le score
+            let message = '';
+            const percentage = (score / totalQuestions) * 100;
+
+            if (percentage >= 90) {
+                message = `🏆 Exceptionnel ! Tu maîtrises parfaitement le calcul mental !<br>
+                          <span class="emoji">🌟</span> Score: ${percentage.toFixed(0)}% - Champion des maths ! <span class="emoji">🌟</span>`;
+            } else if (percentage >= 75) {
+                message = `🎉 Très bien ! Tu as un excellent niveau en calcul mental !<br>
+                          <span class="emoji">👏</span> Score: ${percentage.toFixed(0)}% - Continue comme ça ! <span class="emoji">👏</span>`;
+            } else if (percentage >= 60) {
+                message = `😊 Bien joué ! Tu progresses bien en calcul mental !<br>
+                          <span class="emoji">📈</span> Score: ${percentage.toFixed(0)}% - Tu es sur la bonne voie ! <span class="emoji">📈</span>`;
+            } else if (percentage >= 40) {
+                message = `🌱 C'est un bon début ! Continue à t'entraîner !<br>
+                          <span class="emoji">💪</span> Score: ${percentage.toFixed(0)}% - Chaque effort compte ! <span class="emoji">💪</span>`;
+            } else {
+                message = `🤗 Pas de découragement ! Le calcul mental s'améliore avec la pratique !<br>
+                          <span class="emoji">🌈</span> Score: ${percentage.toFixed(0)}% - Tu vas y arriver ! <span class="emoji">🌈</span>`;
+            }
+
+            encouragementMessage.innerHTML = message;
+        }
+
+        // Fonction pour recommencer l'exercice
+        function restartExercise() {
+            currentQuestion = 0;
+            score = 0;
+            hasSeenAnswer = false;
+
+            document.getElementById('final-screen').classList.add('hidden');
+            document.querySelector('.instructions').classList.remove('hidden');
+        }
+
+        // Gestion de la touche Entrée
+        document.addEventListener('DOMContentLoaded', function() {
+            const userAnswer = document.getElementById('user-answer');
+            if (userAnswer) {
+                userAnswer.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        checkAnswer();
+                    }
+                });
+            }
+        });
+    </script>
+
+</body></html>
