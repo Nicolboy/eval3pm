@@ -1,606 +1,529 @@
-
 <!DOCTYPE html>
-<html lang="fr">
-<head>
+<html lang="fr" data-theme="light" style=""><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercice de Calcul Mental - 45 Questions</title>
+    <title>Calcul Mental - 3ème Prépa-Métiers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 80px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+      .quiz-container {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
 
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+      .header {
+        margin-bottom: 30px;
+      }
 
-        .header {
-            margin-bottom: 30px;
-        }
+      .progress-container {
+        margin: 20px 0;
+      }
 
-        h1 {
-            color: #333;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
+      .progress-bar {
+        width: 100%;
+        height: 12px;
+        background-color: #e9ecef;
+        border-radius: 6px;
+        overflow: hidden;
+        margin: 10px 0;
+      }
 
-        .subtitle {
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #28a745, #20c997);
+        width: 0%;
+        transition: width 0.3s ease;
+      }
 
-        .progress-container {
-            background: #f0f0f0;
-            border-radius: 15px;
-            height: 20px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
+      .question-counter {
+        font-size: 1.1em;
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 10px;
+      }
 
-        .progress-bar {
-            background: linear-gradient(90deg, #4CAF50, #45a049);
-            height: 100%;
-            width: 0%;
-            transition: width 0.5s ease;
-            border-radius: 15px;
-        }
+      .timer {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #007bff;
+        margin-bottom: 20px;
+      }
 
-        .progress-text {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #333;
-        }
+      .question-area {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        margin: 20px 0;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
 
-        .category {
-            background: linear-gradient(90deg, #FF6B6B, #FFE66D);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            display: inline-block;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
+      .question {
+        font-size: 2.5em;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 30px;
+      }
 
-        .question-container {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 25px;
-            border: 2px solid #e9ecef;
-        }
+      .answer-input {
+        font-size: 1.8em;
+        text-align: center;
+        padding: 15px;
+        border: 3px solid #ced4da;
+        border-radius: 8px;
+        width: 200px;
+        margin: 0 auto 20px;
+        transition: border-color 0.3s ease;
+      }
 
-        .question {
-            font-size: 2rem;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
+      .answer-input:focus {
+        outline: none;
+        border-color: #007bff;
+      }
 
-        .answer-input {
-            width: 200px;
-            padding: 15px;
-            font-size: 1.5rem;
-            border: 3px solid #ddd;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-            transition: border-color 0.3s;
-        }
+      .feedback {
+        font-size: 1.3em;
+        font-weight: 600;
+        margin: 15px 0;
+        padding: 10px;
+        border-radius: 5px;
+        min-height: 40px;
+      }
 
-        .answer-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
-        }
+      .correct {
+        color: #155724;
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+      }
 
-        .buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+      .incorrect {
+        color: #721c24;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+      }
 
-        .btn {
-            padding: 12px 25px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            min-width: 120px;
-        }
+      .buttons {
+        margin-top: 20px;
+      }
 
-        .btn-primary {
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            color: white;
-        }
+      .btn {
+        font-size: 1.2em;
+        padding: 12px 24px;
+        margin: 0 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+      }
 
-        .btn-primary:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
+      .btn-primary {
+        background-color: #007bff;
+        color: white;
+      }
 
-        .btn-secondary {
-            background: linear-gradient(90deg, #ffecd2, #fcb69f);
-            color: #333;
-        }
+      .btn-primary:hover {
+        background-color: #0056b3;
+      }
 
-        .btn-secondary:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(252, 182, 159, 0.4);
-        }
+      .btn-success {
+        background-color: #28a745;
+        color: white;
+      }
 
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+      .btn-success:hover {
+        background-color: #1e7e34;
+      }
 
-        .score {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            background: #e8f5e8;
-            padding: 10px;
-            border-radius: 8px;
-        }
+      .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+      }
 
-        .result {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
-        }
+      .btn-secondary:hover {
+        background-color: #545b62;
+      }
 
-        .result.correct {
-            background: #d4edda;
-            color: #155724;
-            border: 2px solid #c3e6cb;
-        }
+      .score-display {
+        font-size: 1.3em;
+        font-weight: 600;
+        color: #495057;
+        margin: 20px 0;
+      }
 
-        .result.incorrect {
-            background: #f8d7da;
-            color: #721c24;
-            border: 2px solid #f5c6cb;
-        }
+      .final-results {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
 
-        .result.hint {
-            background: #fff3cd;
-            color: #856404;
-            border: 2px solid #ffeaa7;
-        }
+      .score-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        font-weight: 700;
+        color: white;
+        margin: 20px auto;
+      }
 
-        .final-screen {
-            display: none;
-            text-align: center;
-        }
+      .excellent {
+        background-color: #28a745;
+      }
+      .good {
+        background-color: #ffc107;
+        color: #212529;
+      }
+      .needs-work {
+        background-color: #dc3545;
+      }
 
-        .final-title {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 30px;
-        }
+      .hidden {
+        display: none;
+      }
 
-        .final-stats {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
+      .start-screen {
+        text-align: center;
+        padding: 40px;
+      }
 
-        .final-score {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #28a745;
-            margin-bottom: 10px;
-        }
+      .instructions {
+        background: #e3f2fd;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        text-align: left;
+      }
 
-        .final-percentage {
-            font-size: 2rem;
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-
-        .final-time {
-            font-size: 1.2rem;
-            color: #6c757d;
-            margin-bottom: 20px;
-        }
-
-        .final-message {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-
-        .btn-restart {
-            background: linear-gradient(90deg, #56ab2f, #a8e6cf);
-            color: white;
-            font-size: 1.2rem;
-            padding: 15px 30px;
-        }
-
-        .btn-restart:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(86, 171, 47, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                margin: 10px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .question {
-                font-size: 1.5rem;
-            }
-
-            .answer-input {
-                width: 100%;
-                max-width: 250px;
-            }
-
-            .buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 250px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .question {
-                font-size: 1.3rem;
-            }
-
-            .final-score {
-                font-size: 2.5rem;
-            }
-
-            .final-percentage {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* Animation pour les résultats */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .result {
-            animation: slideIn 0.5s ease-out;
-        }
-
-        /* Animation pour la barre de progression */
-        .progress-bar {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.3),
-                transparent
-            );
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
-        }
+      .instructions ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div id="game-container">
-            <div class="header">
-                <h1>🧮 Calcul Mental</h1>
-                <div class="subtitle">Exercice progressif - 45 questions</div>
+  </head>
+  <body style="">
+    <div class="quiz-container">
+      <div id="startScreen" class="start-screen">
+        <h1>Calcul Mental</h1>
+        <h2>3ème Prépa-Métiers</h2>
 
-                <div class="progress-container">
-                    <div class="progress-bar" id="progress"></div>
-                </div>
-                <div class="progress-text" id="progress-text">1/45</div>
-
-                <div class="category" id="category">Addition</div>
-
-                <div class="score" id="score">Score : 0/0</div>
-            </div>
-
-            <div class="question-container">
-                <div class="question" id="question">Question 1 : 3 + 4 = ?</div>
-
-                <input type="number" 
-                       class="answer-input" 
-                       id="answer" 
-                       placeholder="Votre réponse"
-                       autocomplete="off">
-
-                <div class="buttons">
-                    <button class="btn btn-primary" id="submit-btn">✓ Valider</button>
-                    <button class="btn btn-secondary" id="show-answer-btn">💡 Voir la réponse</button>
-                </div>
-
-                <div class="result" id="result"></div>
-            </div>
+        <div class="instructions">
+          <h3>Instructions :</h3>
+          <ul>
+            <li>60 questions de difficulté progressive</li>
+            <li>Questions 1-10 : Additions simples (1 chiffre)</li>
+            <li>Questions 11-20 : Soustractions simples</li>
+            <li>Questions 21-30 : Multiplications tables</li>
+            <li>Questions 31-40 : Divisions simples</li>
+            <li>Questions 41-50 : Calculs avec nombres à 2 chiffres</li>
+            <li>Questions 51-55 : Pourcentages faciles</li>
+            <li>Questions 56-60 : Mix d'opérations avancées</li>
+          </ul>
+          <p><strong>Tapez votre réponse et appuyez sur "Valider"</strong></p>
         </div>
 
-        <div class="final-screen" id="final-screen">
-            <h2 class="final-title">🎉 Exercice Terminé !</h2>
+        <button class="btn btn-primary" onclick="startQuiz()">Commencer le Quiz</button>
+      </div>
 
-            <div class="final-stats">
-                <div class="final-score" id="final-score">0/45</div>
-                <div class="final-percentage" id="final-percentage">0%</div>
-                <div class="final-time">Temps total : <span id="final-time">0</span></div>
-
-                <div class="final-message" id="final-message"></div>
+      <div id="quizScreen" class="hidden">
+        <div class="header">
+          <div class="question-counter" id="questionCounter">Question 1 / 60</div>
+          <div class="timer" id="timer">Temps : 00:00</div>
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
             </div>
-
-            <button class="btn btn-restart" id="restart-btn">🔄 Recommencer</button>
+          </div>
+          <div class="score-display" id="scoreDisplay">Score : 0 / 0</div>
         </div>
+
+        <div class="question-area">
+          <div class="question" id="question">6 + 9 = ?</div>
+          <input type="number" class="answer-input" id="answerInput" placeholder="?">
+          <div class="feedback" id="feedback"></div>
+        </div>
+
+        <div class="buttons">
+          <button class="btn btn-primary" id="validateBtn" onclick="validateAnswer()">Valider</button>
+          <button class="btn btn-success hidden" id="nextBtn" onclick="nextQuestion()">Question suivante</button>
+        </div>
+      </div>
+
+      <div id="resultsScreen" class="hidden">
+        <h1>Résultats finaux</h1>
+        <div class="final-results">
+          <div id="scoreCircle" class="score-circle">85%</div>
+          <h2 id="resultMessage">Excellent travail !</h2>
+          <div id="finalStats">
+            <p><strong>Score final :</strong> <span id="finalScore">51 / 60</span></p>
+            <p><strong>Pourcentage :</strong> <span id="finalPercentage">85%</span></p>
+            <p><strong>Temps total :</strong> <span id="finalTime">05:32</span></p>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="restartQuiz()">Recommencer</button>
+      </div>
     </div>
 
     <script>
+      let currentQuestion = 0;
+      let score = 0;
+      let startTime;
+      let questions = [];
+      let userAnswers = [];
+      let timerInterval;
 
-class MentalMathExercise {
-    constructor() {
-        this.questions = [{"question": "3 + 4", "answer": 7}, {"question": "5 + 3", "answer": 8}, {"question": "7 + 2", "answer": 9}, {"question": "6 + 5", "answer": 11}, {"question": "4 + 8", "answer": 12}, {"question": "9 + 3", "answer": 12}, {"question": "2 + 7", "answer": 9}, {"question": "8 + 6", "answer": 14}, {"question": "5 + 7", "answer": 12}, {"question": "9 + 4", "answer": 13}, {"question": "15 - 3", "answer": 12}, {"question": "18 - 6", "answer": 12}, {"question": "20 - 5", "answer": 15}, {"question": "14 - 7", "answer": 7}, {"question": "16 - 4", "answer": 12}, {"question": "19 - 8", "answer": 11}, {"question": "17 - 5", "answer": 12}, {"question": "13 - 6", "answer": 7}, {"question": "12 - 3", "answer": 9}, {"question": "11 - 4", "answer": 7}, {"question": "4 × 2", "answer": 8}, {"question": "3 × 5", "answer": 15}, {"question": "7 × 10", "answer": 70}, {"question": "6 × 2", "answer": 12}, {"question": "8 × 5", "answer": 40}, {"question": "9 × 10", "answer": 90}, {"question": "5 × 2", "answer": 10}, {"question": "4 × 5", "answer": 20}, {"question": "3 × 10", "answer": 30}, {"question": "7 × 2", "answer": 14}, {"question": "10 ÷ 2", "answer": 5}, {"question": "25 ÷ 5", "answer": 5}, {"question": "60 ÷ 10", "answer": 6}, {"question": "14 ÷ 2", "answer": 7}, {"question": "35 ÷ 5", "answer": 7}, {"question": "80 ÷ 10", "answer": 8}, {"question": "18 ÷ 2", "answer": 9}, {"question": "45 ÷ 5", "answer": 9}, {"question": "30 ÷ 10", "answer": 3}, {"question": "16 ÷ 2", "answer": 8}, {"question": "50% de 10", "answer": 5}, {"question": "25% de 8", "answer": 2}, {"question": "10% de 20", "answer": 2}, {"question": "50% de 6", "answer": 3}, {"question": "25% de 12", "answer": 3}];
-        this.currentQuestionIndex = 0;
-        this.score = 0;
-        this.isQuestionAnswered = false;
-        this.startTime = null;
-        this.questionStartTime = null;
+      function generateQuestions() {
+        questions = [];
 
-        this.initializeElements();
-        this.bindEvents();
-        this.displayQuestion();
-        this.updateProgressBar();
-    }
+        // Questions 1-10: Additions simples (1 chiffre)
+        const additions = [
+          { question: '6 + 9', answer: 15 },
+          { question: '8 + 7', answer: 15 },
+          { question: '4 + 9', answer: 13 },
+          { question: '7 + 6', answer: 13 },
+          { question: '5 + 8', answer: 13 },
+          { question: '9 + 8', answer: 17 },
+          { question: '6 + 7', answer: 13 },
+          { question: '8 + 9', answer: 17 },
+          { question: '7 + 5', answer: 12 },
+          { question: '9 + 6', answer: 15 }
+        ];
+        questions.push(...additions);
 
-    initializeElements() {
-        this.questionElement = document.getElementById('question');
-        this.answerInput = document.getElementById('answer');
-        this.submitButton = document.getElementById('submit-btn');
-        this.showAnswerButton = document.getElementById('show-answer-btn');
-        this.resultElement = document.getElementById('result');
-        this.scoreElement = document.getElementById('score');
-        this.progressBar = document.getElementById('progress');
-        this.progressText = document.getElementById('progress-text');
-        this.gameContainer = document.getElementById('game-container');
-        this.finalScreen = document.getElementById('final-screen');
-        this.finalScoreElement = document.getElementById('final-score');
-        this.finalPercentageElement = document.getElementById('final-percentage');
-        this.restartButton = document.getElementById('restart-btn');
+        // Questions 11-20: Soustractions simples (1-2 chiffres)
+        const soustractions = [
+          { question: '17 - 8', answer: 9 },
+          { question: '15 - 7', answer: 8 },
+          { question: '23 - 9', answer: 14 },
+          { question: '21 - 6', answer: 15 },
+          { question: '18 - 9', answer: 9 },
+          { question: '24 - 7', answer: 17 },
+          { question: '19 - 8', answer: 11 },
+          { question: '22 - 5', answer: 17 },
+          { question: '16 - 9', answer: 7 },
+          { question: '25 - 8', answer: 17 }
+        ];
+        questions.push(...soustractions);
 
-        if (!this.questionElement || !this.answerInput || !this.submitButton) {
-            console.error('Elements essentiels non trouvés');
-            return;
+        // Questions 21-30: Multiplications tables simples
+        const multiplications = [
+          { question: '6 × 7', answer: 42 },
+          { question: '8 × 9', answer: 72 },
+          { question: '7 × 8', answer: 56 },
+          { question: '9 × 6', answer: 54 },
+          { question: '7 × 9', answer: 63 },
+          { question: '8 × 7', answer: 56 },
+          { question: '6 × 8', answer: 48 },
+          { question: '9 × 7', answer: 63 },
+          { question: '8 × 6', answer: 48 },
+          { question: '9 × 9', answer: 81 }
+        ];
+        questions.push(...multiplications);
+
+        // Questions 31-40: Divisions simples
+        const divisions = [
+          { question: '48 ÷ 6', answer: 8 },
+          { question: '63 ÷ 9', answer: 7 },
+          { question: '56 ÷ 8', answer: 7 },
+          { question: '72 ÷ 9', answer: 8 },
+          { question: '54 ÷ 6', answer: 9 },
+          { question: '81 ÷ 9', answer: 9 },
+          { question: '42 ÷ 7', answer: 6 },
+          { question: '64 ÷ 8', answer: 8 },
+          { question: '49 ÷ 7', answer: 7 },
+          { question: '36 ÷ 6', answer: 6 }
+        ];
+        questions.push(...divisions);
+
+        // Questions 41-50: Calculs avec nombres à 2 chiffres
+        const calculs2chiffres = [
+          { question: '23 + 45', answer: 68 },
+          { question: '67 - 29', answer: 38 },
+          { question: '34 + 28', answer: 62 },
+          { question: '85 - 37', answer: 48 },
+          { question: '46 + 35', answer: 81 },
+          { question: '73 - 28', answer: 45 },
+          { question: '29 + 47', answer: 76 },
+          { question: '92 - 46', answer: 46 },
+          { question: '38 + 29', answer: 67 },
+          { question: '84 - 39', answer: 45 }
+        ];
+        questions.push(...calculs2chiffres);
+
+        // Questions 51-55: Pourcentages faciles
+        const pourcentages = [
+          { question: '50% de 20', answer: 10 },
+          { question: '25% de 16', answer: 4 },
+          { question: '10% de 30', answer: 3 },
+          { question: '50% de 14', answer: 7 },
+          { question: '25% de 20', answer: 5 }
+        ];
+        questions.push(...pourcentages);
+
+        // Questions 56-60: Mix d'opérations avancées
+        const avancees = [
+          { question: '12 × 8 - 20', answer: 76 },
+          { question: '100 ÷ 4 + 15', answer: 40 },
+          { question: '9 × 7 + 18', answer: 81 },
+          { question: '150 - 6 × 8', answer: 102 },
+          { question: '45 + 9 × 3', answer: 72 }
+        ];
+        questions.push(...avancees);
+      }
+
+      function startQuiz() {
+        generateQuestions();
+        currentQuestion = 0;
+        score = 0;
+        userAnswers = [];
+        startTime = new Date();
+
+        document.getElementById('startScreen').classList.add('hidden');
+        document.getElementById('quizScreen').classList.remove('hidden');
+        document.getElementById('resultsScreen').classList.add('hidden');
+
+        startTimer();
+        showQuestion();
+      }
+
+      function startTimer() {
+        timerInterval = setInterval(function () {
+          const now = new Date();
+          const elapsed = Math.floor((now - startTime) / 1000);
+          const minutes = Math.floor(elapsed / 60);
+          const seconds = elapsed % 60;
+          document.getElementById('timer').textContent =
+            `Temps : ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }, 1000);
+      }
+
+      function showQuestion() {
+        const questionData = questions[currentQuestion];
+        document.getElementById('question').textContent = questionData.question + ' = ?';
+        document.getElementById('answerInput').value = '';
+        document.getElementById('answerInput').focus();
+        document.getElementById('feedback').textContent = '';
+        document.getElementById('feedback').className = 'feedback';
+
+        document.getElementById('validateBtn').classList.remove('hidden');
+        document.getElementById('nextBtn').classList.add('hidden');
+
+        updateProgress();
+      }
+
+      function updateProgress() {
+        const progress = (currentQuestion / questions.length) * 100;
+        document.getElementById('progressFill').style.width = progress + '%';
+        document.getElementById('questionCounter').textContent =
+          `Question ${currentQuestion + 1} / ${questions.length}`;
+        document.getElementById('scoreDisplay').textContent = `Score : ${score} / ${currentQuestion}`;
+      }
+
+      function validateAnswer() {
+        const userAnswer = parseFloat(document.getElementById('answerInput').value);
+        const correctAnswer = questions[currentQuestion].answer;
+        const feedback = document.getElementById('feedback');
+
+        if (isNaN(userAnswer)) {
+          feedback.textContent = 'Veuillez entrer un nombre valide';
+          feedback.className = 'feedback incorrect';
+          return;
         }
 
-        this.startTime = new Date();
-        this.questionStartTime = new Date();
-    }
-
-    bindEvents() {
-        this.submitButton.addEventListener('click', () => this.checkAnswer());
-        this.showAnswerButton.addEventListener('click', () => this.showAnswer());
-        this.restartButton.addEventListener('click', () => this.restart());
-
-        this.answerInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                if (!this.isQuestionAnswered) {
-                    this.checkAnswer();
-                } else {
-                    this.nextQuestion();
-                }
-            }
-        });
-
-        this.answerInput.addEventListener('input', () => {
-            if (this.isQuestionAnswered) {
-                this.resetForNextQuestion();
-            }
-        });
-    }
-
-    displayQuestion() {
-        if (this.currentQuestionIndex >= this.questions.length) {
-            this.showFinalScore();
-            return;
-        }
-
-        const question = this.questions[this.currentQuestionIndex];
-        this.questionElement.textContent = `Question ${this.currentQuestionIndex + 1} : ${question.question} = ?`;
-        this.questionStartTime = new Date();
-
-        // Déterminer la catégorie pour affichage
-        let category = "";
-        if (this.currentQuestionIndex < 10) category = "Addition";
-        else if (this.currentQuestionIndex < 20) category = "Soustraction";
-        else if (this.currentQuestionIndex < 30) category = "Multiplication";
-        else if (this.currentQuestionIndex < 40) category = "Division";
-        else category = "Pourcentage";
-
-        document.getElementById('category').textContent = category;
-    }
-
-    checkAnswer() {
-        if (this.isQuestionAnswered) return;
-
-        const userAnswer = parseFloat(this.answerInput.value);
-        const correctAnswer = this.questions[this.currentQuestionIndex].answer;
-
-        this.isQuestionAnswered = true;
+        userAnswers.push(userAnswer);
 
         if (userAnswer === correctAnswer) {
-            this.score++;
-            this.showResult('✅ Correct ! Bien joué !', 'correct');
+          score++;
+          feedback.textContent = 'Correct ! ✓';
+          feedback.className = 'feedback correct';
         } else {
-            this.showResult(`❌ Incorrect. La bonne réponse était ${correctAnswer}`, 'incorrect');
+          feedback.textContent = `Incorrect. La bonne réponse est : ${correctAnswer}`;
+          feedback.className = 'feedback incorrect';
         }
 
-        this.updateScore();
-        this.disableButtons(false);
+        document.getElementById('validateBtn').classList.add('hidden');
 
-        setTimeout(() => {
-            this.nextQuestion();
-        }, 2000);
-    }
+        if (currentQuestion < questions.length - 1) {
+          document.getElementById('nextBtn').classList.remove('hidden');
+        } else {
+          setTimeout(showResults, 2000);
+        }
 
-    showAnswer() {
-        if (this.isQuestionAnswered) return;
+        updateProgress();
+      }
 
-        const correctAnswer = this.questions[this.currentQuestionIndex].answer;
-        this.answerInput.value = correctAnswer;
-        this.showResult(`💡 Réponse : ${correctAnswer}`, 'hint');
-        this.isQuestionAnswered = true;
-        this.disableButtons(false);
+      function nextQuestion() {
+        currentQuestion++;
+        showQuestion();
+      }
 
-        setTimeout(() => {
-            this.nextQuestion();
-        }, 2000);
-    }
+      function showResults() {
+        clearInterval(timerInterval);
 
-    showResult(message, type) {
-        this.resultElement.textContent = message;
-        this.resultElement.className = `result ${type}`;
-        this.resultElement.style.display = 'block';
-    }
+        document.getElementById('quizScreen').classList.add('hidden');
+        document.getElementById('resultsScreen').classList.remove('hidden');
 
-    updateScore() {
-        this.scoreElement.textContent = `Score : ${this.score}/${this.currentQuestionIndex + 1}`;
-    }
+        const percentage = Math.round((score / questions.length) * 100);
+        const endTime = new Date();
+        const totalTime = Math.floor((endTime - startTime) / 1000);
+        const minutes = Math.floor(totalTime / 60);
+        const seconds = totalTime % 60;
 
-    updateProgressBar() {
-        const progress = ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
-        this.progressBar.style.width = progress + '%';
-        this.progressText.textContent = `${this.currentQuestionIndex + 1}/${this.questions.length}`;
-    }
+        document.getElementById('finalScore').textContent = `${score} / ${questions.length}`;
+        document.getElementById('finalPercentage').textContent = `${percentage}%`;
+        document.getElementById('finalTime').textContent =
+          `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-    disableButtons(disabled) {
-        this.submitButton.disabled = disabled;
-        this.showAnswerButton.disabled = disabled;
-    }
+        const scoreCircle = document.getElementById('scoreCircle');
+        const resultMessage = document.getElementById('resultMessage');
 
-    nextQuestion() {
-        this.currentQuestionIndex++;
-        this.resetForNextQuestion();
-        this.displayQuestion();
-        this.updateProgressBar();
-    }
+        scoreCircle.textContent = `${percentage}%`;
 
-    resetForNextQuestion() {
-        this.isQuestionAnswered = false;
-        this.answerInput.value = '';
-        this.resultElement.style.display = 'none';
-        this.answerInput.focus();
-        this.disableButtons(false);
-    }
+        if (percentage >= 80) {
+          scoreCircle.className = 'score-circle excellent';
+          resultMessage.textContent = 'Excellent travail !';
+        } else if (percentage >= 60) {
+          scoreCircle.className = 'score-circle good';
+          resultMessage.textContent = 'Bon travail !';
+        } else {
+          scoreCircle.className = 'score-circle needs-work';
+          resultMessage.textContent = "Il faut encore s'entraîner !";
+        }
+      }
 
-    showFinalScore() {
-        const percentage = Math.round((this.score / this.questions.length) * 100);
-        const totalTime = Math.round((new Date() - this.startTime) / 1000);
+      function restartQuiz() {
+        document.getElementById('resultsScreen').classList.add('hidden');
+        document.getElementById('startScreen').classList.remove('hidden');
+      }
 
-        this.gameContainer.style.display = 'none';
-        this.finalScreen.style.display = 'block';
-
-        this.finalScoreElement.textContent = `${this.score}/${this.questions.length}`;
-        this.finalPercentageElement.textContent = `${percentage}%`;
-
-        document.getElementById('final-time').textContent = `${totalTime} secondes`;
-
-        let message = "";
-        if (percentage >= 90) message = "🏆 Excellent ! Tu es un champion du calcul mental !";
-        else if (percentage >= 75) message = "👏 Très bien ! Continue comme ça !";
-        else if (percentage >= 50) message = "👍 Bien joué ! Il y a du progrès !";
-        else message = "💪 Continue à t'entraîner, tu vas y arriver !";
-
-        document.getElementById('final-message').textContent = message;
-    }
-
-    restart() {
-        this.currentQuestionIndex = 0;
-        this.score = 0;
-        this.isQuestionAnswered = false;
-        this.startTime = new Date();
-
-        this.gameContainer.style.display = 'block';
-        this.finalScreen.style.display = 'none';
-
-        this.resetForNextQuestion();
-        this.displayQuestion();
-        this.updateProgressBar();
-        this.updateScore();
-    }
-}
-
-// Initialiser l'exercice quand la page est chargée
-document.addEventListener('DOMContentLoaded', () => {
-    new MentalMathExercise();
-});
-
+      // Permettre de valider avec la touche Entrée
+      document.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          if (!document.getElementById('validateBtn').classList.contains('hidden')) {
+            validateAnswer();
+          } else if (!document.getElementById('nextBtn').classList.contains('hidden')) {
+            nextQuestion();
+          }
+        }
+      });
     </script>
-</body>
-</html>
+  
+
+</body></html>
