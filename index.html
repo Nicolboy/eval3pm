@@ -1,529 +1,354 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light" style=""><head>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcul Mental - 3ème Prépa-Métiers</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>3ème Prépa-Métiers - Calcul Mental</title>
     <style>
-      body {
-        max-width: 880px;
-        margin: 0 auto;
-        padding: 32px 80px;
-        position: relative;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-
-      .quiz-container {
-        background: #f8f9fa;
-        border-radius: 15px;
-        padding: 30px;
-        text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .header {
-        margin-bottom: 30px;
-      }
-
-      .progress-container {
-        margin: 20px 0;
-      }
-
-      .progress-bar {
-        width: 100%;
-        height: 12px;
-        background-color: #e9ecef;
-        border-radius: 6px;
-        overflow: hidden;
-        margin: 10px 0;
-      }
-
-      .progress-fill {
-        height: 100%;
-        background: linear-gradient(90deg, #28a745, #20c997);
-        width: 0%;
-        transition: width 0.3s ease;
-      }
-
-      .question-counter {
-        font-size: 1.1em;
-        font-weight: 600;
-        color: #495057;
-        margin-bottom: 10px;
-      }
-
-      .timer {
-        font-size: 1.2em;
-        font-weight: 600;
-        color: #007bff;
-        margin-bottom: 20px;
-      }
-
-      .question-area {
-        background: white;
-        padding: 40px;
-        border-radius: 10px;
-        margin: 20px 0;
-        min-height: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .question {
-        font-size: 2.5em;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 30px;
-      }
-
-      .answer-input {
-        font-size: 1.8em;
-        text-align: center;
-        padding: 15px;
-        border: 3px solid #ced4da;
-        border-radius: 8px;
-        width: 200px;
-        margin: 0 auto 20px;
-        transition: border-color 0.3s ease;
-      }
-
-      .answer-input:focus {
-        outline: none;
-        border-color: #007bff;
-      }
-
-      .feedback {
-        font-size: 1.3em;
-        font-weight: 600;
-        margin: 15px 0;
-        padding: 10px;
-        border-radius: 5px;
-        min-height: 40px;
-      }
-
-      .correct {
-        color: #155724;
-        background-color: #d4edda;
-        border: 1px solid #c3e6cb;
-      }
-
-      .incorrect {
-        color: #721c24;
-        background-color: #f8d7da;
-        border: 1px solid #f5c6cb;
-      }
-
-      .buttons {
-        margin-top: 20px;
-      }
-
-      .btn {
-        font-size: 1.2em;
-        padding: 12px 24px;
-        margin: 0 10px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-weight: 600;
-      }
-
-      .btn-primary {
-        background-color: #007bff;
-        color: white;
-      }
-
-      .btn-primary:hover {
-        background-color: #0056b3;
-      }
-
-      .btn-success {
-        background-color: #28a745;
-        color: white;
-      }
-
-      .btn-success:hover {
-        background-color: #1e7e34;
-      }
-
-      .btn-secondary {
-        background-color: #6c757d;
-        color: white;
-      }
-
-      .btn-secondary:hover {
-        background-color: #545b62;
-      }
-
-      .score-display {
-        font-size: 1.3em;
-        font-weight: 600;
-        color: #495057;
-        margin: 20px 0;
-      }
-
-      .final-results {
-        background: white;
-        padding: 30px;
-        border-radius: 10px;
-        margin: 20px 0;
-      }
-
-      .score-circle {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2em;
-        font-weight: 700;
-        color: white;
-        margin: 20px auto;
-      }
-
-      .excellent {
-        background-color: #28a745;
-      }
-      .good {
-        background-color: #ffc107;
-        color: #212529;
-      }
-      .needs-work {
-        background-color: #dc3545;
-      }
-
-      .hidden {
-        display: none;
-      }
-
-      .start-screen {
-        text-align: center;
-        padding: 40px;
-      }
-
-      .instructions {
-        background: #e3f2fd;
-        padding: 20px;
-        border-radius: 8px;
-        margin: 20px 0;
-        text-align: left;
-      }
-
-      .instructions ul {
-        margin: 10px 0;
-        padding-left: 20px;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f8ff;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .instructions {
+            text-align: left;
+            background: #e6f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .question-display {
+            font-size: 36px;
+            color: #2c3e50;
+            margin: 30px 0;
+            font-weight: bold;
+        }
+        
+        #answer {
+            font-size: 24px;
+            padding: 10px;
+            width: 150px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        .feedback {
+            font-size: 20px;
+            margin: 15px 0;
+            min-height: 25px;
+        }
+        
+        .correct { color: #27ae60; }
+        .incorrect { color: #e74c3c; }
+        
+        .results {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .final-score {
+            font-size: 48px;
+            color: #2c3e50;
+            margin: 20px 0;
+        }
+        
+        .hidden { display: none; }
     </style>
-  </head>
-  <body style="">
-    <div class="quiz-container">
-      <div id="startScreen" class="start-screen">
-        <h1>Calcul Mental</h1>
-        <h2>3ème Prépa-Métiers</h2>
-
-        <div class="instructions">
-          <h3>Instructions :</h3>
-          <ul>
-            <li>60 questions de difficulté progressive</li>
-            <li>Questions 1-10 : Additions simples (1 chiffre)</li>
-            <li>Questions 11-20 : Soustractions simples</li>
-            <li>Questions 21-30 : Multiplications tables</li>
-            <li>Questions 31-40 : Divisions simples</li>
-            <li>Questions 41-50 : Calculs avec nombres à 2 chiffres</li>
-            <li>Questions 51-55 : Pourcentages faciles</li>
-            <li>Questions 56-60 : Mix d'opérations avancées</li>
-          </ul>
-          <p><strong>Tapez votre réponse et appuyez sur "Valider"</strong></p>
-        </div>
-
-        <button class="btn btn-primary" onclick="startQuiz()">Commencer le Quiz</button>
-      </div>
-
-      <div id="quizScreen" class="hidden">
-        <div class="header">
-          <div class="question-counter" id="questionCounter">Question 1 / 60</div>
-          <div class="timer" id="timer">Temps : 00:00</div>
-          <div class="progress-container">
-            <div class="progress-bar">
-              <div class="progress-fill" id="progressFill"></div>
+</head>
+<body>
+    <div class="container">
+        <!-- Écran d'instructions -->
+        <div id="start-screen">
+            <h1>3ème Prépa-Métiers</h1>
+            <div class="instructions">
+                <h3>Instructions :</h3>
+                <ul>
+                    <li>60 questions de difficulté progressive</li>
+                    <li>Questions 1-10 : Additions simples (1 chiffre)</li>
+                    <li>Questions 11-20 : Soustractions simples</li>
+                    <li>Questions 21-30 : Multiplications tables</li>
+                    <li>Questions 31-40 : Divisions simples</li>
+                    <li>Questions 41-50 : Calculs avec nombres à 2 chiffres</li>
+                    <li>Questions 51-55 : Pourcentages faciles</li>
+                    <li>Questions 56-58 : Statistiques et probabilités</li>
+                    <li>Questions 59-60 : Mix d'opérations avancées</li>
+                </ul>
+                <p><strong>Tapez votre réponse et appuyez sur "Valider"</strong></p>
             </div>
-          </div>
-          <div class="score-display" id="scoreDisplay">Score : 0 / 0</div>
+            <button onclick="startQuiz()">Commencer</button>
         </div>
 
-        <div class="question-area">
-          <div class="question" id="question">6 + 9 = ?</div>
-          <input type="number" class="answer-input" id="answerInput" placeholder="?">
-          <div class="feedback" id="feedback"></div>
+        <!-- Écran de quiz -->
+        <div id="quiz-screen" class="hidden">
+            <div class="stats">
+                <span id="question-counter">Question 1 / 60</span>
+                <span id="timer">Temps : 00:00</span>
+                <span id="score-display">Score : 0 / 0</span>
+            </div>
+            
+            <div class="question-display" id="question-text">7 + 3</div>
+            
+            <div>
+                <input type="number" id="answer" placeholder="?" autofocus>
+                <button onclick="checkAnswer()">Valider</button>
+            </div>
+            
+            <div class="feedback" id="feedback"></div>
         </div>
 
-        <div class="buttons">
-          <button class="btn btn-primary" id="validateBtn" onclick="validateAnswer()">Valider</button>
-          <button class="btn btn-success hidden" id="nextBtn" onclick="nextQuestion()">Question suivante</button>
+        <!-- Écran de résultats -->
+        <div id="results-screen" class="hidden">
+            <div class="results">
+                <h2 id="final-message">Excellent travail !</h2>
+                <div class="final-score" id="final-percentage">85%</div>
+                <p><strong>Score final :</strong> <span id="final-score">51 / 60</span></p>
+                <p><strong>Pourcentage :</strong> <span id="final-percent-text">85%</span></p>
+                <p><strong>Temps total :</strong> <span id="final-time">05:32</span></p>
+                <button onclick="restartQuiz()">Recommencer</button>
+            </div>
         </div>
-      </div>
-
-      <div id="resultsScreen" class="hidden">
-        <h1>Résultats finaux</h1>
-        <div class="final-results">
-          <div id="scoreCircle" class="score-circle">85%</div>
-          <h2 id="resultMessage">Excellent travail !</h2>
-          <div id="finalStats">
-            <p><strong>Score final :</strong> <span id="finalScore">51 / 60</span></p>
-            <p><strong>Pourcentage :</strong> <span id="finalPercentage">85%</span></p>
-            <p><strong>Temps total :</strong> <span id="finalTime">05:32</span></p>
-          </div>
-        </div>
-        <button class="btn btn-primary" onclick="restartQuiz()">Recommencer</button>
-      </div>
     </div>
 
     <script>
-      let currentQuestion = 0;
-      let score = 0;
-      let startTime;
-      let questions = [];
-      let userAnswers = [];
-      let timerInterval;
-
-      function generateQuestions() {
-        questions = [];
-
-        // Questions 1-10: Additions simples (1 chiffre)
-        const additions = [
-          { question: '6 + 9', answer: 15 },
-          { question: '8 + 7', answer: 15 },
-          { question: '4 + 9', answer: 13 },
-          { question: '7 + 6', answer: 13 },
-          { question: '5 + 8', answer: 13 },
-          { question: '9 + 8', answer: 17 },
-          { question: '6 + 7', answer: 13 },
-          { question: '8 + 9', answer: 17 },
-          { question: '7 + 5', answer: 12 },
-          { question: '9 + 6', answer: 15 }
+        // Variables globales
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        let totalQuestions = 0;
+        let startTime;
+        let timerInterval;
+        
+        // Base de données des questions
+        const questions = [
+            // Questions 1-10: Additions simples (1 chiffre)
+            {question: "3 + 5", answer: 8},
+            {question: "7 + 2", answer: 9},
+            {question: "4 + 6", answer: 10},
+            {question: "8 + 1", answer: 9},
+            {question: "5 + 4", answer: 9},
+            {question: "2 + 7", answer: 9},
+            {question: "6 + 3", answer: 9},
+            {question: "9 + 1", answer: 10},
+            {question: "4 + 5", answer: 9},
+            {question: "3 + 6", answer: 9},
+            
+            // Questions 11-20: Soustractions simples
+            {question: "9 - 3", answer: 6},
+            {question: "8 - 5", answer: 3},
+            {question: "10 - 4", answer: 6},
+            {question: "7 - 2", answer: 5},
+            {question: "9 - 6", answer: 3},
+            {question: "8 - 3", answer: 5},
+            {question: "10 - 7", answer: 3},
+            {question: "9 - 4", answer: 5},
+            {question: "8 - 6", answer: 2},
+            {question: "10 - 5", answer: 5},
+            
+            // Questions 21-30: Multiplications tables
+            {question: "3 × 4", answer: 12},
+            {question: "5 × 6", answer: 30},
+            {question: "7 × 8", answer: 56},
+            {question: "4 × 9", answer: 36},
+            {question: "6 × 7", answer: 42},
+            {question: "8 × 5", answer: 40},
+            {question: "9 × 3", answer: 27},
+            {question: "2 × 9", answer: 18},
+            {question: "7 × 6", answer: 42},
+            {question: "8 × 4", answer: 32},
+            
+            // Questions 31-40: Divisions simples
+            {question: "24 ÷ 6", answer: 4},
+            {question: "35 ÷ 7", answer: 5},
+            {question: "48 ÷ 8", answer: 6},
+            {question: "27 ÷ 9", answer: 3},
+            {question: "42 ÷ 6", answer: 7},
+            {question: "36 ÷ 4", answer: 9},
+            {question: "56 ÷ 8", answer: 7},
+            {question: "45 ÷ 5", answer: 9},
+            {question: "32 ÷ 4", answer: 8},
+            {question: "49 ÷ 7", answer: 7},
+            
+            // Questions 41-50: Calculs avec nombres à 2 chiffres
+            {question: "15 + 27", answer: 42},
+            {question: "34 - 19", answer: 15},
+            {question: "23 + 38", answer: 61},
+            {question: "56 - 29", answer: 27},
+            {question: "12 × 3", answer: 36},
+            {question: "45 + 17", answer: 62},
+            {question: "73 - 28", answer: 45},
+            {question: "14 × 4", answer: 56},
+            {question: "84 ÷ 4", answer: 21},
+            {question: "39 + 26", answer: 65},
+            
+            // Questions 51-55: Pourcentages faciles
+            {question: "50% de 20", answer: 10},
+            {question: "25% de 40", answer: 10},
+            {question: "10% de 80", answer: 8},
+            {question: "75% de 20", answer: 15},
+            {question: "20% de 50", answer: 10},
+            
+            // Questions 56-58: Statistiques et probabilités
+            {question: "Moyenne de 8, 10, 12", answer: 10},
+            {question: "Médiane de 3, 5, 7", answer: 5},
+            {question: "Probabilité (sur 6) de tirer un 6 avec un dé", answer: 1},
+            
+            // Questions 59-60: Mix d'opérations avancées
+            {question: "15 + 8 × 2", answer: 31},
+            {question: "100 - 6 × 7", answer: 58}
         ];
-        questions.push(...additions);
-
-        // Questions 11-20: Soustractions simples (1-2 chiffres)
-        const soustractions = [
-          { question: '17 - 8', answer: 9 },
-          { question: '15 - 7', answer: 8 },
-          { question: '23 - 9', answer: 14 },
-          { question: '21 - 6', answer: 15 },
-          { question: '18 - 9', answer: 9 },
-          { question: '24 - 7', answer: 17 },
-          { question: '19 - 8', answer: 11 },
-          { question: '22 - 5', answer: 17 },
-          { question: '16 - 9', answer: 7 },
-          { question: '25 - 8', answer: 17 }
-        ];
-        questions.push(...soustractions);
-
-        // Questions 21-30: Multiplications tables simples
-        const multiplications = [
-          { question: '6 × 7', answer: 42 },
-          { question: '8 × 9', answer: 72 },
-          { question: '7 × 8', answer: 56 },
-          { question: '9 × 6', answer: 54 },
-          { question: '7 × 9', answer: 63 },
-          { question: '8 × 7', answer: 56 },
-          { question: '6 × 8', answer: 48 },
-          { question: '9 × 7', answer: 63 },
-          { question: '8 × 6', answer: 48 },
-          { question: '9 × 9', answer: 81 }
-        ];
-        questions.push(...multiplications);
-
-        // Questions 31-40: Divisions simples
-        const divisions = [
-          { question: '48 ÷ 6', answer: 8 },
-          { question: '63 ÷ 9', answer: 7 },
-          { question: '56 ÷ 8', answer: 7 },
-          { question: '72 ÷ 9', answer: 8 },
-          { question: '54 ÷ 6', answer: 9 },
-          { question: '81 ÷ 9', answer: 9 },
-          { question: '42 ÷ 7', answer: 6 },
-          { question: '64 ÷ 8', answer: 8 },
-          { question: '49 ÷ 7', answer: 7 },
-          { question: '36 ÷ 6', answer: 6 }
-        ];
-        questions.push(...divisions);
-
-        // Questions 41-50: Calculs avec nombres à 2 chiffres
-        const calculs2chiffres = [
-          { question: '23 + 45', answer: 68 },
-          { question: '67 - 29', answer: 38 },
-          { question: '34 + 28', answer: 62 },
-          { question: '85 - 37', answer: 48 },
-          { question: '46 + 35', answer: 81 },
-          { question: '73 - 28', answer: 45 },
-          { question: '29 + 47', answer: 76 },
-          { question: '92 - 46', answer: 46 },
-          { question: '38 + 29', answer: 67 },
-          { question: '84 - 39', answer: 45 }
-        ];
-        questions.push(...calculs2chiffres);
-
-        // Questions 51-55: Pourcentages faciles
-        const pourcentages = [
-          { question: '50% de 20', answer: 10 },
-          { question: '25% de 16', answer: 4 },
-          { question: '10% de 30', answer: 3 },
-          { question: '50% de 14', answer: 7 },
-          { question: '25% de 20', answer: 5 }
-        ];
-        questions.push(...pourcentages);
-
-        // Questions 56-60: Mix d'opérations avancées
-        const avancees = [
-          { question: '12 × 8 - 20', answer: 76 },
-          { question: '100 ÷ 4 + 15', answer: 40 },
-          { question: '9 × 7 + 18', answer: 81 },
-          { question: '150 - 6 × 8', answer: 102 },
-          { question: '45 + 9 × 3', answer: 72 }
-        ];
-        questions.push(...avancees);
-      }
-
-      function startQuiz() {
-        generateQuestions();
-        currentQuestion = 0;
-        score = 0;
-        userAnswers = [];
-        startTime = new Date();
-
-        document.getElementById('startScreen').classList.add('hidden');
-        document.getElementById('quizScreen').classList.remove('hidden');
-        document.getElementById('resultsScreen').classList.add('hidden');
-
-        startTimer();
-        showQuestion();
-      }
-
-      function startTimer() {
-        timerInterval = setInterval(function () {
-          const now = new Date();
-          const elapsed = Math.floor((now - startTime) / 1000);
-          const minutes = Math.floor(elapsed / 60);
-          const seconds = elapsed % 60;
-          document.getElementById('timer').textContent =
-            `Temps : ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }, 1000);
-      }
-
-      function showQuestion() {
-        const questionData = questions[currentQuestion];
-        document.getElementById('question').textContent = questionData.question + ' = ?';
-        document.getElementById('answerInput').value = '';
-        document.getElementById('answerInput').focus();
-        document.getElementById('feedback').textContent = '';
-        document.getElementById('feedback').className = 'feedback';
-
-        document.getElementById('validateBtn').classList.remove('hidden');
-        document.getElementById('nextBtn').classList.add('hidden');
-
-        updateProgress();
-      }
-
-      function updateProgress() {
-        const progress = (currentQuestion / questions.length) * 100;
-        document.getElementById('progressFill').style.width = progress + '%';
-        document.getElementById('questionCounter').textContent =
-          `Question ${currentQuestion + 1} / ${questions.length}`;
-        document.getElementById('scoreDisplay').textContent = `Score : ${score} / ${currentQuestion}`;
-      }
-
-      function validateAnswer() {
-        const userAnswer = parseFloat(document.getElementById('answerInput').value);
-        const correctAnswer = questions[currentQuestion].answer;
-        const feedback = document.getElementById('feedback');
-
-        if (isNaN(userAnswer)) {
-          feedback.textContent = 'Veuillez entrer un nombre valide';
-          feedback.className = 'feedback incorrect';
-          return;
+        
+        function startQuiz() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            
+            currentQuestionIndex = 0;
+            correctAnswers = 0;
+            totalQuestions = 0;
+            startTime = new Date();
+            
+            startTimer();
+            showQuestion();
         }
-
-        userAnswers.push(userAnswer);
-
-        if (userAnswer === correctAnswer) {
-          score++;
-          feedback.textContent = 'Correct ! ✓';
-          feedback.className = 'feedback correct';
-        } else {
-          feedback.textContent = `Incorrect. La bonne réponse est : ${correctAnswer}`;
-          feedback.className = 'feedback incorrect';
+        
+        function startTimer() {
+            timerInterval = setInterval(function() {
+                const now = new Date();
+                const elapsed = Math.floor((now - startTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                document.getElementById('timer').textContent = 
+                    `Temps : ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }, 1000);
         }
-
-        document.getElementById('validateBtn').classList.add('hidden');
-
-        if (currentQuestion < questions.length - 1) {
-          document.getElementById('nextBtn').classList.remove('hidden');
-        } else {
-          setTimeout(showResults, 2000);
+        
+        function showQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                endQuiz();
+                return;
+            }
+            
+            const question = questions[currentQuestionIndex];
+            document.getElementById('question-text').textContent = question.question;
+            document.getElementById('question-counter').textContent = `Question ${currentQuestionIndex + 1} / ${questions.length}`;
+            document.getElementById('score-display').textContent = `Score : ${correctAnswers} / ${totalQuestions}`;
+            document.getElementById('answer').value = '';
+            document.getElementById('answer').focus();
+            document.getElementById('feedback').textContent = '';
         }
-
-        updateProgress();
-      }
-
-      function nextQuestion() {
-        currentQuestion++;
-        showQuestion();
-      }
-
-      function showResults() {
-        clearInterval(timerInterval);
-
-        document.getElementById('quizScreen').classList.add('hidden');
-        document.getElementById('resultsScreen').classList.remove('hidden');
-
-        const percentage = Math.round((score / questions.length) * 100);
-        const endTime = new Date();
-        const totalTime = Math.floor((endTime - startTime) / 1000);
-        const minutes = Math.floor(totalTime / 60);
-        const seconds = totalTime % 60;
-
-        document.getElementById('finalScore').textContent = `${score} / ${questions.length}`;
-        document.getElementById('finalPercentage').textContent = `${percentage}%`;
-        document.getElementById('finalTime').textContent =
-          `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-        const scoreCircle = document.getElementById('scoreCircle');
-        const resultMessage = document.getElementById('resultMessage');
-
-        scoreCircle.textContent = `${percentage}%`;
-
-        if (percentage >= 80) {
-          scoreCircle.className = 'score-circle excellent';
-          resultMessage.textContent = 'Excellent travail !';
-        } else if (percentage >= 60) {
-          scoreCircle.className = 'score-circle good';
-          resultMessage.textContent = 'Bon travail !';
-        } else {
-          scoreCircle.className = 'score-circle needs-work';
-          resultMessage.textContent = "Il faut encore s'entraîner !";
+        
+        function checkAnswer() {
+            const userAnswer = parseFloat(document.getElementById('answer').value);
+            const correctAnswer = questions[currentQuestionIndex].answer;
+            const feedback = document.getElementById('feedback');
+            
+            totalQuestions++;
+            
+            if (userAnswer === correctAnswer) {
+                correctAnswers++;
+                feedback.textContent = '✓ Correct !';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.textContent = `✗ Incorrect. La réponse était ${correctAnswer}`;
+                feedback.className = 'feedback incorrect';
+            }
+            
+            setTimeout(function() {
+                currentQuestionIndex++;
+                showQuestion();
+            }, 1500);
         }
-      }
-
-      function restartQuiz() {
-        document.getElementById('resultsScreen').classList.add('hidden');
-        document.getElementById('startScreen').classList.remove('hidden');
-      }
-
-      // Permettre de valider avec la touche Entrée
-      document.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-          if (!document.getElementById('validateBtn').classList.contains('hidden')) {
-            validateAnswer();
-          } else if (!document.getElementById('nextBtn').classList.contains('hidden')) {
-            nextQuestion();
-          }
+        
+        function endQuiz() {
+            clearInterval(timerInterval);
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+            
+            const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+            const now = new Date();
+            const totalTime = Math.floor((now - startTime) / 1000);
+            const minutes = Math.floor(totalTime / 60);
+            const seconds = totalTime % 60;
+            
+            document.getElementById('final-score').textContent = `${correctAnswers} / ${totalQuestions}`;
+            document.getElementById('final-percentage').textContent = `${percentage}%`;
+            document.getElementById('final-percent-text').textContent = `${percentage}%`;
+            document.getElementById('final-time').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+            // Message selon le score
+            let message;
+            if (percentage >= 90) message = "Excellent travail !";
+            else if (percentage >= 80) message = "Très bien !";
+            else if (percentage >= 70) message = "Bien !";
+            else if (percentage >= 60) message = "Peut mieux faire";
+            else message = "Il faut réviser";
+            
+            document.getElementById('final-message').textContent = message;
         }
-      });
+        
+        function restartQuiz() {
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('start-screen').classList.remove('hidden');
+        }
+        
+        // Gérer la touche Entrée
+        document.getElementById('answer').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+        
+        // Empêcher la soumission du formulaire
+        document.getElementById('answer').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+            }
+        });
     </script>
-  
-
-</body></html>
+</body>
+</html>
