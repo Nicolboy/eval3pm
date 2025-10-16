@@ -3,539 +3,606 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soutien Mathématiques - Seconde Pro</title>
+    <title>Évaluation Mathématiques - Préparation Fonctions Seconde Pro</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: white;
-        }
-        
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.95);
-            color: #333;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-        
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 28px;
-        }
-        
-        .instructions {
-            text-align: left;
-            background: #e8f4fd;
             padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            font-size: 15px;
-            border-left: 4px solid #3498db;
         }
-        
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-            font-size: 16px;
-            font-weight: bold;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-        }
-        
-        .question-display {
-            font-size: 32px;
-            color: #2c3e50;
-            margin: 40px 0;
-            font-weight: bold;
-            text-align: center;
-            background: #ecf0f1;
-            padding: 25px;
-            border-radius: 10px;
-        }
-        
-        #answer {
-            font-size: 22px;
-            padding: 12px;
-            width: 200px;
-            text-align: center;
-            border: 3px solid #3498db;
-            border-radius: 8px;
-            margin: 15px;
-            background: #fff;
-        }
-        
-        #answer:focus {
-            outline: none;
-            border-color: #2980b9;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
-        }
-        
-        button {
-            font-size: 18px;
-            padding: 12px 25px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 10px;
-            transition: all 0.3s;
-        }
-        
-        button:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        
-        .feedback {
-            font-size: 22px;
-            margin: 20px 0;
-            min-height: 30px;
-            font-weight: bold;
-        }
-        
-        .correct { 
-            color: #27ae60; 
-            background: #d5f4e6;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .incorrect { 
-            color: #e74c3c; 
-            background: #fadbd8;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        
-        .results {
-            background: linear-gradient(135deg, #74b9ff, #0984e3);
-            color: white;
-            padding: 30px;
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
             border-radius: 15px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .final-score {
-            font-size: 64px;
-            margin: 30px 0;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: #ecf0f1;
-            border-radius: 10px;
-            margin: 15px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             overflow: hidden;
         }
-        
-        .progress-fill {
-            height: 100%;
-            background: #3498db;
-            transition: width 0.3s ease;
-            border-radius: 10px;
-        }
-        
-        .hidden { display: none; }
-        
-        .theme-indicator {
-            background: #3498db;
+
+        .header {
+            background: linear-gradient(45deg, #2c3e50, #34495e);
             color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .navigation {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.active {
+            background: #007bff;
+            color: white;
+        }
+
+        .nav-btn:hover {
+            background: #0056b3;
+            color: white;
+        }
+
+        .section {
+            display: none;
+            padding: 30px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+            transition: transform 0.2s;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            font-size: 1.1em;
+            font-weight: 600;
             margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .answers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .answer-btn {
+            padding: 12px 20px;
+            border: 2px solid #dee2e6;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+
+        .answer-btn:hover {
+            border-color: #007bff;
+            background: #f0f8ff;
+        }
+
+        .answer-btn.selected {
+            background: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+
+        .answer-btn.correct {
+            background: #28a745;
+            color: white;
+            border-color: #1e7e34;
+        }
+
+        .answer-btn.incorrect {
+            background: #dc3545;
+            color: white;
+            border-color: #c82333;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .progress {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .score-display {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .score-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .control-buttons {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #1e7e34;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        .final-results {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .final-results.show {
+            display: block;
+        }
+
+        .section-score {
             display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #007bff;
+        }
+
+        @media (max-width: 768px) {
+            .navigation {
+                flex-direction: column;
+            }
+            
+            .answers {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Écran d'instructions -->
-        <div id="start-screen">
-            <h1>🧮 Soutien Mathématiques - Seconde Pro</h1>
-            <div class="instructions">
-                <h3>📋 Programme du questionnaire (80 questions) :</h3>
-                <ul>
-                    <li><strong>Questions 1-20 :</strong> Calculs de base (additions, soustractions, multiplications, divisions)</li>
-                    <li><strong>Questions 21-35 :</strong> Règles de calcul (priorités, parenthèses, puissances)</li>
-                    <li><strong>Questions 36-55 :</strong> Numération (décimaux, fractions, conversions)</li>
-                    <li><strong>Questions 56-80 :</strong> Pourcentages (calculs, applications, problèmes concrets)</li>
-                </ul>
-                <p><strong>⏱️ Durée estimée :</strong> 25-30 minutes</p>
-                <p><strong>🎯 Objectif :</strong> Réviser les bases essentielles pour la seconde professionnelle</p>
-                <p><strong>💡 Conseil :</strong> Prenez votre temps, l'important c'est de comprendre !</p>
-            </div>
-            <button onclick="startQuiz()" style="font-size: 20px; padding: 15px 30px;">🚀 Commencer le questionnaire</button>
+        <div class="header">
+            <h1>🧮 Évaluation Mathématiques</h1>
+            <p>Préparation au chapitre sur les fonctions - Classe de Seconde Professionnelle</p>
         </div>
 
-        <!-- Écran de quiz -->
-        <div id="quiz-screen" class="hidden">
-            <div class="stats">
-                <span id="question-counter">Question 1 / 80</span>
-                <span id="timer">Temps : 00:00</span>
-                <span id="score-display">Score : 0 / 0</span>
-            </div>
-            
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill" style="width: 1.25%"></div>
-            </div>
-            
-            <div class="theme-indicator" id="theme-indicator">Calculs de base</div>
-            
-            <div class="question-display" id="question-text">15 + 23</div>
-            
-            <div style="text-align: center;">
-                <input type="number" id="answer" placeholder="Votre réponse" autofocus>
-                <br>
-                <button onclick="checkAnswer()">✓ Valider</button>
-                <button onclick="skipQuestion()" style="background: #95a5a6;">⏭️ Passer</button>
-            </div>
-            
-            <div class="feedback" id="feedback"></div>
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('calcul-mental')">Calcul Mental</button>
+            <button class="nav-btn" onclick="showSection('pourcentages')">Pourcentages & Fractions</button>
+            <button class="nav-btn" onclick="showSection('egalites')">Équations</button>
+            <button class="nav-btn" onclick="showSection('inegalites')">Inégalités</button>
         </div>
 
-        <!-- Écran de résultats -->
-        <div id="results-screen" class="hidden">
-            <div class="results">
-                <h2 id="final-message">Excellent travail !</h2>
-                <div class="final-score" id="final-percentage">85%</div>
-                <p><strong>📊 Score final :</strong> <span id="final-score">68 / 80</span></p>
-                <p><strong>⏱️ Temps total :</strong> <span id="final-time">25:32</span></p>
-                <p><strong>🎯 Questions réussies :</strong> <span id="final-percent-text">85%</span></p>
-                
-                <div id="detailed-results" style="margin-top: 20px; text-align: left;">
-                    <h3>📈 Détail par thème :</h3>
-                    <div id="theme-breakdown"></div>
-                </div>
-                
-                <button onclick="restartQuiz()">🔄 Recommencer</button>
-                <button onclick="showMistakes()" style="background: #e74c3c;">❌ Voir les erreurs</button>
-            </div>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
-        
-        <!-- Écran des erreurs -->
-        <div id="mistakes-screen" class="hidden">
-            <h2>📝 Révision des erreurs</h2>
-            <div id="mistakes-list"></div>
-            <button onclick="backToResults()">← Retour aux résultats</button>
+
+        <div class="score-display">
+            <div class="score-number" id="currentScore">0/60</div>
+            <p>Questions répondues correctement</p>
+        </div>
+
+        <!-- Section Calcul Mental -->
+        <div id="calcul-mental" class="section active">
+            <h2>📊 Calcul Mental (20 questions)</h2>
+            <div id="calcul-mental-questions"></div>
+        </div>
+
+        <!-- Section Pourcentages et Fractions -->
+        <div id="pourcentages" class="section">
+            <h2>🔢 Pourcentages, Fractions et Nombres Décimaux (20 questions)</h2>
+            <div id="pourcentages-questions"></div>
+        </div>
+
+        <!-- Section Égalités -->
+        <div id="egalites" class="section">
+            <h2>⚖️ Résolution d'Équations (10 questions)</h2>
+            <div id="egalites-questions"></div>
+        </div>
+
+        <!-- Section Inégalités -->
+        <div id="inegalites" class="section">
+            <h2>📈 Inégalités (10 questions)</h2>
+            <div id="inegalites-questions"></div>
+        </div>
+
+        <div class="final-results" id="finalResults">
+            <h2>🎉 Résultats Finaux</h2>
+            <div class="score-number" id="finalScore"></div>
+            <div id="sectionScores"></div>
+            <div id="finalMessage"></div>
+        </div>
+
+        <div class="control-buttons">
+            <button class="btn btn-primary" onclick="checkAnswers()">Vérifier les Réponses</button>
+            <button class="btn btn-success" onclick="showResults()" style="display:none;" id="showResultsBtn">Voir les Résultats</button>
+            <button class="btn btn-secondary" onclick="resetQuiz()">Recommencer</button>
         </div>
     </div>
 
     <script>
-        // Variables globales
-        let currentQuestionIndex = 0;
-        let correctAnswers = 0;
-        let totalQuestions = 0;
-        let startTime;
-        let timerInterval;
-        let userAnswers = [];
-        let themeScores = {
-            "Calculs de base": {correct: 0, total: 0},
-            "Règles de calcul": {correct: 0, total: 0},
-            "Numération": {correct: 0, total: 0},
-            "Pourcentages": {correct: 0, total: 0}
+        // Données des questions
+        const questions = {
+            'calcul-mental': [
+                {q: "15 + 27 = ?", answers: ["42", "41", "43", "44"], correct: 0},
+                {q: "63 - 18 = ?", answers: ["45", "44", "46", "47"], correct: 0},
+                {q: "8 × 7 = ?", answers: ["54", "56", "58", "52"], correct: 1},
+                {q: "144 ÷ 12 = ?", answers: ["11", "12", "13", "14"], correct: 1},
+                {q: "25 + 36 = ?", answers: ["61", "62", "60", "59"], correct: 0},
+                {q: "80 - 23 = ?", answers: ["57", "58", "56", "59"], correct: 0},
+                {q: "9 × 6 = ?", answers: ["52", "54", "56", "58"], correct: 1},
+                {q: "91 ÷ 7 = ?", answers: ["12", "13", "14", "15"], correct: 1},
+                {q: "47 + 28 = ?", answers: ["75", "74", "76", "73"], correct: 0},
+                {q: "100 - 34 = ?", answers: ["66", "65", "67", "64"], correct: 0},
+                {q: "12 × 8 = ?", answers: ["94", "96", "98", "92"], correct: 1},
+                {q: "156 ÷ 13 = ?", answers: ["11", "12", "13", "14"], correct: 1},
+                {q: "38 + 45 = ?", answers: ["83", "82", "84", "81"], correct: 0},
+                {q: "75 - 29 = ?", answers: ["46", "45", "47", "44"], correct: 0},
+                {q: "15 × 4 = ?", answers: ["58", "60", "62", "56"], correct: 1},
+                {q: "132 ÷ 11 = ?", answers: ["11", "12", "13", "10"], correct: 1},
+                {q: "56 + 37 = ?", answers: ["93", "92", "94", "91"], correct: 0},
+                {q: "90 - 48 = ?", answers: ["42", "41", "43", "40"], correct: 0},
+                {q: "7 × 11 = ?", answers: ["76", "77", "78", "75"], correct: 1},
+                {q: "168 ÷ 14 = ?", answers: ["11", "12", "13", "10"], correct: 1}
+            ],
+            'pourcentages': [
+                {q: "25% de 80 = ?", answers: ["20", "25", "15", "30"], correct: 0},
+                {q: "1/2 + 1/4 = ?", answers: ["3/4", "2/6", "1/3", "2/4"], correct: 0},
+                {q: "0,5 + 0,25 = ?", answers: ["0,75", "0,65", "0,80", "0,70"], correct: 0},
+                {q: "15% de 200 = ?", answers: ["30", "25", "35", "20"], correct: 0},
+                {q: "3/5 de 100 = ?", answers: ["60", "50", "70", "40"], correct: 0},
+                {q: "0,8 × 50 = ?", answers: ["40", "35", "45", "30"], correct: 0},
+                {q: "20% de 150 = ?", answers: ["30", "25", "35", "40"], correct: 0},
+                {q: "2/3 + 1/6 = ?", answers: ["5/6", "3/9", "4/6", "1/2"], correct: 0},
+                {q: "1,2 + 0,8 = ?", answers: ["2", "1,8", "2,2", "1,6"], correct: 0},
+                {q: "10% de 90 = ?", answers: ["9", "8", "10", "11"], correct: 0},
+                {q: "3/4 de 80 = ?", answers: ["60", "55", "65", "50"], correct: 0},
+                {q: "0,6 × 30 = ?", answers: ["18", "16", "20", "15"], correct: 0},
+                {q: "30% de 120 = ?", answers: ["36", "32", "40", "28"], correct: 0},
+                {q: "1/5 + 2/5 = ?", answers: ["3/5", "3/10", "1/2", "2/3"], correct: 0},
+                {q: "2,5 + 1,5 = ?", answers: ["4", "3,5", "4,5", "3"], correct: 0},
+                {q: "5% de 400 = ?", answers: ["20", "15", "25", "30"], correct: 0},
+                {q: "4/5 de 75 = ?", answers: ["60", "55", "65", "50"], correct: 0},
+                {q: "0,4 × 25 = ?", answers: ["10", "8", "12", "15"], correct: 0},
+                {q: "40% de 60 = ?", answers: ["24", "20", "28", "16"], correct: 0},
+                {q: "1/3 + 1/6 = ?", answers: ["1/2", "2/9", "1/4", "2/6"], correct: 0}
+            ],
+            'egalites': [
+                {q: "Résoudre : x + 5 = 12", answers: ["x = 7", "x = 6", "x = 8", "x = 17"], correct: 0},
+                {q: "Résoudre : 2x = 14", answers: ["x = 7", "x = 6", "x = 8", "x = 28"], correct: 0},
+                {q: "Résoudre : x - 3 = 9", answers: ["x = 12", "x = 6", "x = 11", "x = 13"], correct: 0},
+                {q: "Résoudre : 3x + 2 = 11", answers: ["x = 3", "x = 4", "x = 2", "x = 5"], correct: 0},
+                {q: "Résoudre : x/2 = 8", answers: ["x = 16", "x = 4", "x = 10", "x = 6"], correct: 0},
+                {q: "Résoudre : 5x - 1 = 19", answers: ["x = 4", "x = 3", "x = 5", "x = 6"], correct: 0},
+                {q: "Résoudre : x + 8 = 15", answers: ["x = 7", "x = 23", "x = 6", "x = 8"], correct: 0},
+                {q: "Résoudre : 4x = 20", answers: ["x = 5", "x = 4", "x = 6", "x = 16"], correct: 0},
+                {q: "Résoudre : x - 7 = 2", answers: ["x = 9", "x = 5", "x = -5", "x = 14"], correct: 0},
+                {q: "Résoudre : 2x + 3 = 13", answers: ["x = 5", "x = 8", "x = 4", "x = 6"], correct: 0}
+            ],
+            'inegalites': [
+                {q: "Résoudre : x + 3 > 7", answers: ["x > 4", "x > 10", "x > 3", "x < 4"], correct: 0},
+                {q: "Résoudre : 2x < 12", answers: ["x < 6", "x < 24", "x < 10", "x > 6"], correct: 0},
+                {q: "Résoudre : x - 2 ≥ 5", answers: ["x ≥ 7", "x ≥ 3", "x ≤ 7", "x ≥ 8"], correct: 0},
+                {q: "Résoudre : 3x + 1 > 10", answers: ["x > 3", "x > 11", "x > 2", "x < 3"], correct: 0},
+                {q: "Résoudre : x/2 ≤ 4", answers: ["x ≤ 8", "x ≤ 2", "x ≥ 8", "x ≤ 6"], correct: 0},
+                {q: "Résoudre : 5x - 2 < 18", answers: ["x < 4", "x < 16", "x < 3", "x > 4"], correct: 0},
+                {q: "Résoudre : x + 6 ≥ 10", answers: ["x ≥ 4", "x ≥ 16", "x ≤ 4", "x ≥ 3"], correct: 0},
+                {q: "Résoudre : 4x > 16", answers: ["x > 4", "x > 64", "x > 12", "x < 4"], correct: 0},
+                {q: "Résoudre : x - 5 < 1", answers: ["x < 6", "x < -4", "x > 6", "x < 4"], correct: 0},
+                {q: "Résoudre : 2x + 4 ≤ 14", answers: ["x ≤ 5", "x ≤ 9", "x ≤ 7", "x ≥ 5"], correct: 0}
+            ]
         };
-        
-        // Base de données des questions avec thèmes
-        const questions = [
-            // Questions 1-20: Calculs de base
-            {question: "15 + 23", answer: 38, theme: "Calculs de base"},
-            {question: "47 - 19", answer: 28, theme: "Calculs de base"},
-            {question: "12 × 8", answer: 96, theme: "Calculs de base"},
-            {question: "84 ÷ 4", answer: 21, theme: "Calculs de base"},
-            {question: "156 + 278", answer: 434, theme: "Calculs de base"},
-            {question: "503 - 187", answer: 316, theme: "Calculs de base"},
-            {question: "25 × 16", answer: 400, theme: "Calculs de base"},
-            {question: "144 ÷ 12", answer: 12, theme: "Calculs de base"},
-            {question: "89 + 156", answer: 245, theme: "Calculs de base"},
-            {question: "321 - 158", answer: 163, theme: "Calculs de base"},
-            {question: "18 × 15", answer: 270, theme: "Calculs de base"},
-            {question: "225 ÷ 15", answer: 15, theme: "Calculs de base"},
-            {question: "234 + 567", answer: 801, theme: "Calculs de base"},
-            {question: "800 - 347", answer: 453, theme: "Calculs de base"},
-            {question: "24 × 12", answer: 288, theme: "Calculs de base"},
-            {question: "336 ÷ 14", answer: 24, theme: "Calculs de base"},
-            {question: "145 + 289", answer: 434, theme: "Calculs de base"},
-            {question: "600 - 245", answer: 355, theme: "Calculs de base"},
-            {question: "35 × 8", answer: 280, theme: "Calculs de base"},
-            {question: "512 ÷ 16", answer: 32, theme: "Calculs de base"},
 
-            // Questions 21-35: Règles de calcul
-            {question: "3 + 5 × 2", answer: 13, theme: "Règles de calcul"},
-            {question: "20 - 4 × 3", answer: 8, theme: "Règles de calcul"},
-            {question: "(8 + 2) × 3", answer: 30, theme: "Règles de calcul"},
-            {question: "15 ÷ 3 + 7", answer: 12, theme: "Règles de calcul"},
-            {question: "2 × (9 - 4)", answer: 10, theme: "Règles de calcul"},
-            {question: "24 ÷ 6 + 8", answer: 12, theme: "Règles de calcul"},
-            {question: "5 + 3 × 4", answer: 17, theme: "Règles de calcul"},
-            {question: "(12 - 4) ÷ 2", answer: 4, theme: "Règles de calcul"},
-            {question: "3²", answer: 9, theme: "Règles de calcul"},
-            {question: "5²", answer: 25, theme: "Règles de calcul"},
-            {question: "2³", answer: 8, theme: "Règles de calcul"},
-            {question: "4²", answer: 16, theme: "Règles de calcul"},
-            {question: "18 - 2 × 6", answer: 6, theme: "Règles de calcul"},
-            {question: "(15 + 5) ÷ 4", answer: 5, theme: "Règles de calcul"},
-            {question: "7 × 2 + 6", answer: 20, theme: "Règles de calcul"},
+        let userAnswers = {};
+        let totalCorrect = 0;
+        let sectionScores = {};
 
-            // Questions 36-55: Numération
-            {question: "0,5 + 0,3", answer: 0.8, theme: "Numération"},
-            {question: "1,2 - 0,7", answer: 0.5, theme: "Numération"},
-            {question: "0,4 × 5", answer: 2, theme: "Numération"},
-            {question: "2,5 ÷ 5", answer: 0.5, theme: "Numération"},
-            {question: "1/2 + 1/4 (en décimal)", answer: 0.75, theme: "Numération"},
-            {question: "3/4 - 1/4 (en décimal)", answer: 0.5, theme: "Numération"},
-            {question: "1/5 en décimal", answer: 0.2, theme: "Numération"},
-            {question: "3/10 en décimal", answer: 0.3, theme: "Numération"},
-            {question: "0,25 en fraction (dénominateur)", answer: 4, theme: "Numération"},
-            {question: "0,6 × 10", answer: 6, theme: "Numération"},
-            {question: "12,5 ÷ 10", answer: 1.25, theme: "Numération"},
-            {question: "0,08 × 100", answer: 8, theme: "Numération"},
-            {question: "456 ÷ 100", answer: 4.56, theme: "Numération"},
-            {question: "2,3 + 1,7", answer: 4, theme: "Numération"},
-            {question: "5,6 - 2,8", answer: 2.8, theme: "Numération"},
-            {question: "0,7 × 3", answer: 2.1, theme: "Numération"},
-            {question: "1,8 ÷ 6", answer: 0.3, theme: "Numération"},
-            {question: "1/3 (arrondi à 0,01)", answer: 0.33, theme: "Numération"},
-            {question: "2/3 (arrondi à 0,01)", answer: 0.67, theme: "Numération"},
-            {question: "7/8 en décimal", answer: 0.875, theme: "Numération"},
+        // Initialiser l'application
+        function init() {
+            generateQuestions();
+            updateProgressBar();
+            updateScore();
+        }
 
-            // Questions 56-80: Pourcentages
-            {question: "10% de 50", answer: 5, theme: "Pourcentages"},
-            {question: "20% de 80", answer: 16, theme: "Pourcentages"},
-            {question: "25% de 60", answer: 15, theme: "Pourcentages"},
-            {question: "50% de 90", answer: 45, theme: "Pourcentages"},
-            {question: "75% de 40", answer: 30, theme: "Pourcentages"},
-            {question: "30% de 120", answer: 36, theme: "Pourcentages"},
-            {question: "15% de 200", answer: 30, theme: "Pourcentages"},
-            {question: "5% de 300", answer: 15, theme: "Pourcentages"},
-            {question: "40% de 150", answer: 60, theme: "Pourcentages"},
-            {question: "60% de 250", answer: 150, theme: "Pourcentages"},
-            {question: "Article à 80€, -20%. Prix final?", answer: 64, theme: "Pourcentages"},
-            {question: "Prix 150€, +10% de taxe. Total?", answer: 165, theme: "Pourcentages"},
-            {question: "Salaire 1500€, +8%. Nouveau salaire?", answer: 1620, theme: "Pourcentages"},
-            {question: "Population 2000, -15%. Nouvelle pop?", answer: 1700, theme: "Pourcentages"},
-            {question: "Note 16/20 en pourcentage", answer: 80, theme: "Pourcentages"},
-            {question: "12 élèves sur 30 en pourcentage", answer: 40, theme: "Pourcentages"},
-            {question: "75 sur 150 en pourcentage", answer: 50, theme: "Pourcentages"},
-            {question: "18 sur 24 en pourcentage", answer: 75, theme: "Pourcentages"},
-            {question: "Augmentation de 200 à 240 (en %)", answer: 20, theme: "Pourcentages"},
-            {question: "Réduction de 100 à 85 (en %)", answer: 15, theme: "Pourcentages"},
-            {question: "TVA 20% sur 500€. Montant TVA?", answer: 100, theme: "Pourcentages"},
-            {question: "Remise 30% sur 90€. Économie?", answer: 27, theme: "Pourcentages"},
-            {question: "Intérêts 3% sur 2000€", answer: 60, theme: "Pourcentages"},
-            {question: "Commission 5% sur vente 800€", answer: 40, theme: "Pourcentages"},
-            {question: "85% de réussite sur 40 élèves", answer: 34, theme: "Pourcentages"}
-        ];
-        
-        function getThemeIndicator(index) {
-            if (index < 20) return "Calculs de base";
-            if (index < 35) return "Règles de calcul";
-            if (index < 55) return "Numération";
-            return "Pourcentages";
-        }
-        
-        function startQuiz() {
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            
-            currentQuestionIndex = 0;
-            correctAnswers = 0;
-            totalQuestions = 0;
-            userAnswers = [];
-            startTime = new Date();
-            
-            // Reset theme scores
-            for (let theme in themeScores) {
-                themeScores[theme] = {correct: 0, total: 0};
-            }
-            
-            startTimer();
-            showQuestion();
-        }
-        
-        function startTimer() {
-            timerInterval = setInterval(function() {
-                const now = new Date();
-                const elapsed = Math.floor((now - startTime) / 1000);
-                const minutes = Math.floor(elapsed / 60);
-                const seconds = elapsed % 60;
-                document.getElementById('timer').textContent = 
-                    `Temps : ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            }, 1000);
-        }
-        
-        function showQuestion() {
-            if (currentQuestionIndex >= questions.length) {
-                endQuiz();
-                return;
-            }
-            
-            const question = questions[currentQuestionIndex];
-            document.getElementById('question-text').textContent = question.question;
-            document.getElementById('question-counter').textContent = `Question ${currentQuestionIndex + 1} / ${questions.length}`;
-            document.getElementById('score-display').textContent = `Score : ${correctAnswers} / ${totalQuestions}`;
-            document.getElementById('theme-indicator').textContent = question.theme;
-            document.getElementById('answer').value = '';
-            document.getElementById('answer').focus();
-            document.getElementById('feedback').textContent = '';
-            
-            // Update progress bar
-            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-            document.getElementById('progress-fill').style.width = `${progress}%`;
-        }
-        
-        function checkAnswer() {
-            const userAnswer = parseFloat(document.getElementById('answer').value);
-            const question = questions[currentQuestionIndex];
-            const correctAnswer = question.answer;
-            const feedback = document.getElementById('feedback');
-            
-            totalQuestions++;
-            themeScores[question.theme].total++;
-            
-            // Store user answer
-            userAnswers.push({
-                question: question.question,
-                userAnswer: userAnswer,
-                correctAnswer: correctAnswer,
-                isCorrect: userAnswer === correctAnswer,
-                theme: question.theme
-            });
-            
-            if (userAnswer === correctAnswer) {
-                correctAnswers++;
-                themeScores[question.theme].correct++;
-                feedback.textContent = '✓ Excellent ! Bonne réponse !';
-                feedback.className = 'feedback correct';
-            } else {
-                feedback.textContent = `✗ Pas tout à fait... La réponse était ${correctAnswer}`;
-                feedback.className = 'feedback incorrect';
-            }
-            
-            setTimeout(function() {
-                currentQuestionIndex++;
-                showQuestion();
-            }, 2000);
-        }
-        
-        function skipQuestion() {
-            const question = questions[currentQuestionIndex];
-            totalQuestions++;
-            themeScores[question.theme].total++;
-            
-            userAnswers.push({
-                question: question.question,
-                userAnswer: "Non répondu",
-                correctAnswer: question.answer,
-                isCorrect: false,
-                theme: question.theme
-            });
-            
-            document.getElementById('feedback').textContent = '⏭️ Question passée';
-            document.getElementById('feedback').className = 'feedback';
-            
-            setTimeout(function() {
-                currentQuestionIndex++;
-                showQuestion();
-            }, 1000);
-        }
-        
-        function endQuiz() {
-            clearInterval(timerInterval);
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.remove('hidden');
-            
-            const percentage = Math.round((correctAnswers / totalQuestions) * 100);
-            const now = new Date();
-            const totalTime = Math.floor((now - startTime) / 1000);
-            const minutes = Math.floor(totalTime / 60);
-            const seconds = totalTime % 60;
-            
-            document.getElementById('final-score').textContent = `${correctAnswers} / ${totalQuestions}`;
-            document.getElementById('final-percentage').textContent = `${percentage}%`;
-            document.getElementById('final-percent-text').textContent = `${percentage}%`;
-            document.getElementById('final-time').textContent = 
-                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            
-            // Message selon le score
-            let message;
-            if (percentage >= 90) message = "🏆 Excellent travail ! Niveau maîtrisé !";
-            else if (percentage >= 80) message = "🎉 Très bien ! Bonne maîtrise !";
-            else if (percentage >= 70) message = "👍 Bien ! Quelques révisions à prévoir";
-            else if (percentage >= 60) message = "📚 Peut mieux faire, il faut réviser";
-            else if (percentage >= 50) message = "⚠️ Difficultés importantes à corriger";
-            else message = "🚨 Bases à retravailler en priorité";
-            
-            document.getElementById('final-message').textContent = message;
-            
-            // Detailed theme breakdown
-            let breakdown = "";
-            for (let theme in themeScores) {
-                const score = themeScores[theme];
-                const themePercentage = score.total > 0 ? Math.round((score.correct / score.total) * 100) : 0;
-                breakdown += `<p><strong>${theme}:</strong> ${score.correct}/${score.total} (${themePercentage}%)</p>`;
-            }
-            document.getElementById('theme-breakdown').innerHTML = breakdown;
-        }
-        
-        function showMistakes() {
-            document.getElementById('results-screen').classList.add('hidden');
-            document.getElementById('mistakes-screen').classList.remove('hidden');
-            
-            let mistakesList = "<h3>Questions à retravailler :</h3>";
-            userAnswers.forEach((answer, index) => {
-                if (!answer.isCorrect) {
-                    mistakesList += `
-                        <div style="background: #fadbd8; padding: 15px; margin: 10px 0; border-radius: 8px;">
-                            <strong>Question ${index + 1}:</strong> ${answer.question}<br>
-                            <strong>Votre réponse:</strong> ${answer.userAnswer}<br>
-                            <strong>Bonne réponse:</strong> ${answer.correctAnswer}<br>
-                            <strong>Thème:</strong> ${answer.theme}
+        // Générer toutes les questions
+        function generateQuestions() {
+            Object.keys(questions).forEach(section => {
+                const container = document.getElementById(section + '-questions');
+                container.innerHTML = '';
+                
+                questions[section].forEach((q, index) => {
+                    const questionDiv = document.createElement('div');
+                    questionDiv.className = 'question-card';
+                    questionDiv.innerHTML = `
+                        <div class="question">${index + 1}. ${q.q}</div>
+                        <div class="answers">
+                            ${q.answers.map((answer, i) => 
+                                `<button class="answer-btn" onclick="selectAnswer('${section}', ${index}, ${i})">${answer}</button>`
+                            ).join('')}
                         </div>
+                        <div class="feedback" id="feedback-${section}-${index}"></div>
                     `;
+                    container.appendChild(questionDiv);
+                });
+            });
+        }
+
+        // Sélectionner une réponse
+        function selectAnswer(section, questionIndex, answerIndex) {
+            const questionKey = `${section}-${questionIndex}`;
+            userAnswers[questionKey] = answerIndex;
+            
+            // Mettre à jour l'interface
+            const questionCard = document.querySelectorAll(`#${section}-questions .question-card`)[questionIndex];
+            const buttons = questionCard.querySelectorAll('.answer-btn');
+            
+            buttons.forEach((btn, i) => {
+                btn.classList.remove('selected');
+                if (i === answerIndex) {
+                    btn.classList.add('selected');
                 }
             });
-            document.getElementById('mistakes-list').innerHTML = mistakesList;
+            
+            updateProgressBar();
         }
-        
-        function backToResults() {
-            document.getElementById('mistakes-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.remove('hidden');
+
+        // Afficher une section
+        function showSection(sectionName) {
+            // Masquer toutes les sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Afficher la section sélectionnée
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Mettre à jour la navigation
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
         }
-        
-        function restartQuiz() {
-            document.getElementById('results-screen').classList.add('hidden');
-            document.getElementById('mistakes-screen').classList.add('hidden');
-            document.getElementById('start-screen').classList.remove('hidden');
+
+        // Vérifier les réponses
+        function checkAnswers() {
+            totalCorrect = 0;
+            sectionScores = {};
+            
+            Object.keys(questions).forEach(section => {
+                let sectionCorrect = 0;
+                
+                questions[section].forEach((q, index) => {
+                    const questionKey = `${section}-${index}`;
+                    const userAnswer = userAnswers[questionKey];
+                    const correctAnswer = q.correct;
+                    const isCorrect = userAnswer === correctAnswer;
+                    
+                    if (isCorrect) {
+                        totalCorrect++;
+                        sectionCorrect++;
+                    }
+                    
+                    // Mettre à jour l'interface
+                    const questionCard = document.querySelectorAll(`#${section}-questions .question-card`)[index];
+                    const buttons = questionCard.querySelectorAll('.answer-btn');
+                    const feedback = document.getElementById(`feedback-${section}-${index}`);
+                    
+                    buttons.forEach((btn, i) => {
+                        btn.classList.remove('selected', 'correct', 'incorrect');
+                        if (i === correctAnswer) {
+                            btn.classList.add('correct');
+                        } else if (i === userAnswer && userAnswer !== correctAnswer) {
+                            btn.classList.add('incorrect');
+                        }
+                    });
+                    
+                    feedback.style.display = 'block';
+                    feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+                    feedback.textContent = isCorrect ? '✓ Correct !' : `✗ Incorrect. La bonne réponse est : ${q.answers[correctAnswer]}`;
+                });
+                
+                sectionScores[section] = {
+                    correct: sectionCorrect,
+                    total: questions[section].length
+                };
+            });
+            
+            updateScore();
+            document.getElementById('showResultsBtn').style.display = 'inline-block';
         }
-        
-        // Gérer la touche Entrée
-        document.getElementById('answer').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkAnswer();
+
+        // Afficher les résultats finaux
+        function showResults() {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            const finalResults = document.getElementById('finalResults');
+            finalResults.classList.add('show');
+            
+            const finalScore = document.getElementById('finalScore');
+            const percentage = Math.round((totalCorrect / 60) * 100);
+            finalScore.textContent = `${totalCorrect}/60 (${percentage}%)`;
+            
+            // Scores par section
+            const sectionScoresDiv = document.getElementById('sectionScores');
+            const sectionNames = {
+                'calcul-mental': 'Calcul Mental',
+                'pourcentages': 'Pourcentages & Fractions',
+                'egalites': 'Équations',
+                'inegalites': 'Inégalités'
+            };
+            
+            sectionScoresDiv.innerHTML = Object.keys(sectionScores).map(section => `
+                <div class="section-score">
+                    <strong>${sectionNames[section]}</strong><br>
+                    ${sectionScores[section].correct}/${sectionScores[section].total}
+                </div>
+            `).join('');
+            
+            // Message final
+            const finalMessage = document.getElementById('finalMessage');
+            let message = '';
+            if (percentage >= 80) {
+                message = '🎉 Excellent ! Vous maîtrisez bien les prérequis pour les fonctions.';
+            } else if (percentage >= 60) {
+                message = '👍 Bien ! Quelques révisions et vous serez prêt(e) pour les fonctions.';
+            } else {
+                message = '📚 Il faut encore travailler ces notions avant d\'aborder les fonctions.';
             }
-        });
-        
-        // Empêcher la soumission du formulaire
-        document.getElementById('answer').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-            }
-        });
+            finalMessage.innerHTML = `<p style="font-size: 1.2em; margin-top: 20px;">${message}</p>`;
+        }
+
+        // Mettre à jour la barre de progression
+        function updateProgressBar() {
+            const totalQuestions = 60;
+            const answeredQuestions = Object.keys(userAnswers).length;
+            const percentage = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+
+        // Mettre à jour le score
+        function updateScore() {
+            document.getElementById('currentScore').textContent = `${totalCorrect}/60`;
+        }
+
+        // Recommencer le quiz
+        function resetQuiz() {
+            userAnswers = {};
+            totalCorrect = 0;
+            sectionScores = {};
+            
+            document.getElementById('finalResults').classList.remove('show');
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'block';
+            });
+            
+            showSection('calcul-mental');
+            
+            // Réinitialiser l'interface
+            document.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            document.querySelectorAll('.feedback').forEach(feedback => {
+                feedback.style.display = 'none';
+            });
+            
+            document.getElementById('showResultsBtn').style.display = 'none';
+            
+            updateProgressBar();
+            updateScore();
+        }
+
+        // Initialiser au chargement de la page
+        window.onload = init;
     </script>
 </body>
 </html>
